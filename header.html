@@ -1,0 +1,361 @@
+<style>
+.focus-lit { margin-bottom: 0.6em; }
+.tyof-bar {
+  width: 90%;
+  height: 60px;
+  margin: 0.4em auto 0 auto;
+  display: flex;
+}
+.tyof-obs       { width: 80%; background: #E0E0E0; }
+.tyof-rct       { width: 20%; background: #E0E0E0; }
+.tyof-rct-blue  { width: 20%; background: #000080; }
+.tyof-label,
+.tyof-label-white {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 20px;
+}
+.tyof-label-white { color: #fff; }
+.tyof-dashed {
+  height: 42px;
+  margin: 0 auto;
+  border: 1.5px dashed #333;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 22px;
+}
+.tyof-dashed-full  { width: 90%; }
+.tyof-dashed-right {
+  width: 18%;
+  margin-right: 5%;
+  margin-left: auto;
+  margin-top: 2px;
+}
+.phantom   { visibility: hidden; }
+.phantom li { list-style: none; }
+
+/* Small badge link (bottom-right, above page number) */
+.badge-link {
+  position: absolute;
+  bottom: 80px;
+  right: 20px;
+  font-size: 11px;
+  padding: 3px 8px;
+  background: #e8e8e8;
+  color: #444;
+  border-radius: 3px;
+  text-decoration: none;
+  z-index: 100;
+}
+.badge-link:hover { background: #ccc; }
+
+/* Contributions slide styling */
+.contrib h2 { margin-bottom: 0.3em; }
+.contrib p, .contrib ul { font-size: 24px; line-height: 1.8; }
+.hi-num { color: #c0392b; font-weight: bold; }
+
+/* Regression table */
+.reg-tbl             { border-collapse: collapse; width: 95%; margin: 0 auto; font-size: 22px; position: relative; top: -20px; }
+.reg-tbl th          { padding: 6px 14px; text-align: center; font-weight: normal; }
+.reg-tbl thead tr:last-child th { border-bottom: 2px solid #333; }
+.reg-tbl td          { padding: 5px 14px; text-align: center; border: none; }
+.reg-tbl td:first-child { text-align: left; }
+.reg-tbl tbody tr:last-child td { border-bottom: 2px solid #333; }
+
+/* Registration descriptives table */
+/* Priors progressive reveal — cover right panel */
+.priors-slide .priors-cover-b {
+  position: absolute;
+  top: 14%;
+  right: 0;
+  bottom: 0;
+  left: 51%;
+  background: #fff;
+}
+
+/* RR slide — text on the left, image as background on the right */
+.rr-text {
+  width: 38%;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* Red highlight boxes for RR progressive reveal */
+.rr-highlight {
+  position: absolute;
+  border: 3px solid red;
+  z-index: 10;
+  pointer-events: none;
+}
+/* Image sits at right 3%, 43% wide → left edge at ~54% */
+.rr-hl-title    { top: 0%;  left: 55%;  width: 16%; height: 8%; }
+.rr-hl-hyp      { top: 16%; left: 55%;  width: 43%; height: 18%; }
+.rr-hl-details  { top: 9%;  left: 55%;  width: 43%; height: 5%; }
+.rr-hl-est      { top: 40%; left: 55%;  width: 43%; height: 16%; }
+.rr-hl-het      { top: 60%; left: 55%;  width: 43%; height: 30%; }
+
+/* Engagement table */
+.eng-tbl             { border-collapse: collapse; width: 98%; margin: 1em auto; font-size: 24px; }
+.eng-tbl th          { padding: 8px 16px; text-align: center; font-weight: normal; }
+.eng-tbl thead tr:last-child th { border-bottom: 2px solid #333; }
+.eng-tbl td          { padding: 14px 16px; text-align: center; border: none; }
+.eng-tbl td:first-child { text-align: left; font-style: italic; }
+.eng-tbl tbody tr:last-child td { font-weight: bold; font-style: normal; }
+
+/* File drawer bullets pinned from top so first bullet stays in place */
+.fd-bullets {
+  position: absolute;
+  top: 66%;
+  left: 40px;
+  right: 40px;
+  font-size: 22px;
+}
+.fd-bullets li {
+  margin-bottom: 8px;
+}
+
+/* Team headshot collage — scattered */
+.team-collage img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  position: absolute;
+}
+
+/* Evidence-to-Policy flow diagram */
+.e2p-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 13px;
+}
+.e2p-arrow { font-size: 20px; color: #888; }
+.e2p-tri {
+  width: 70px; height: 70px;
+  border-left: 35px solid transparent;
+  border-right: 35px solid transparent;
+  border-bottom: 60px solid #ddd;
+  text-align: center;
+  position: relative;
+}
+.e2p-tri span {
+  position: absolute;
+  top: 25px;
+  left: -20px;
+  width: 40px;
+  font-size: 11px;
+  text-align: center;
+}
+.e2p-circ {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  border: 1.5px solid #888;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 12px;
+  position: relative;
+  background: #fff;
+}
+.e2p-circ-sm {
+  width: 65px; height: 65px;
+  font-size: 11px;
+}
+.e2p-rect {
+  border: 1.5px solid #888;
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 12px;
+  text-align: center;
+}
+.e2p-block {
+  position: absolute;
+  width: 35px; height: 55px;
+  background: #000;
+  transform: rotate(25deg);
+  top: -10px; left: 20px;
+  z-index: 2;
+}
+.e2p-branch {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-left: 5px;
+}
+.e2p-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.desc-tbl            { border-collapse: collapse; width: 95%; margin: 0 auto; font-size: 18px; }
+.desc-tbl td:first-child { white-space: nowrap; }
+.full-tbl-slide { padding: 0.5em 1em !important; }
+.full-tbl-slide h2 { font-size: 22px; margin-bottom: 0.2em; }
+.desc-tbl th         { border-bottom: 2px solid #333; padding: 3px 10px; text-align: right; }
+.desc-tbl th:first-child { text-align: left; }
+.desc-tbl td         { padding: 2px 10px; text-align: right; border: none; }
+.desc-tbl td:first-child { text-align: left; }
+.desc-tbl .panel-hdr td {
+  font-weight: bold;
+  padding-top: 10px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #999;
+  text-align: left;
+}
+.grey      { color: #ccc; }
+
+/* ---------- Sample & standardization flow ---------- */
+.samp-sec   { margin: 0.4em 0; font-size: 13px; }
+.samp-tag   { font-weight: bold; font-size: 14px; margin-bottom: 4px; }
+.samp-flow  { display: flex; align-items: center; gap: 6px; }
+.samp-box   {
+  padding: 6px 8px;
+  border: 1px solid #777;
+  text-align: center;
+  line-height: 1.2;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+.samp-light   { background: #F2F2F2; }
+.samp-dark    { background: #333; color: #fff; font-weight: bold; }
+.samp-green   { background: #DDEED9; }
+.samp-blue    { background: #D9E3F1; }
+.samp-excl    { text-align: left; font-size: 11px; min-width: 150px; }
+.samp-tiny    { font-size: 11px; min-width: 90px; }
+.samp-arrow   { font-size: 22px; color: #555; }
+.samp-g0, .samp-g1 {
+  border: 1px solid #777;
+  padding: 8px;
+  background: #FFF;
+  font-size: 11px;
+  min-width: 140px;
+  text-align: center;
+}
+.samp-g0 { background: #EAF5E6; }
+.samp-g1 { background: #EBF1F9; }
+.samp-brace {
+  display: flex;
+  justify-content: space-around;
+  font-style: italic;
+  color: #555;
+  margin-top: 2px;
+  font-size: 14px;
+}
+.samp-brace span:first-child { margin-left: 15%; }
+.samp-brace span:last-child  { margin-right: 10%; }
+.samp-final {
+  margin: 0.6em auto 0 auto;
+  width: fit-content;
+  padding: 10px 20px;
+  background: #333;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 4px;
+}
+.samp-on    { opacity: 1; }
+.samp-muted { opacity: 0.25; }
+.samp-off   { visibility: hidden; }
+
+.consort-row {
+  display: block;
+  width: 95%;
+  margin: 4px auto;
+}
+.consort-hide { visibility: hidden; }
+
+/* Three-column layout for outcomes */
+.three-col {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  align-items: flex-start;
+  margin-top: 0.5em;
+}
+.three-col .col {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.three-col .col-title {
+  font-weight: bold;
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+.three-col .col img {
+  width: 100%;
+  height: 55vh;
+  object-fit: contain;
+  object-position: top;
+}
+.three-col .otbl          { font-size: 18px; }
+.three-col .otbl td       { padding: 14px 8px; }
+.three-col .otbl th       { padding: 6px 8px; }
+.three-col .col .small    { margin-top: 20px; font-size: 16px; }
+
+/* Outcome definition tables */
+.otbl           { border-collapse: collapse; width: 100%; font-size: 14px; }
+.otbl th        { font-weight: normal; padding: 4px 6px; border-bottom: 2px solid #333; }
+.otbl td        { padding: 8px 6px; border: 1px solid #bbb; text-align: center; }
+.otbl .hyp      { background: #E8F0E0; text-align: left; }
+.otbl .zig      { background: #E8F0E0; color: #999; font-style: italic; }
+.otbl .yes-g    { background: #6B9E4F; color: #fff; font-weight: bold; }
+.otbl .no-w     { background: #fff; }
+.otbl .yes-dg   { background: #4E7A35; color: #fff; font-weight: bold; }
+.otbl .no-b     { background: #7BAAD4; color: #fff; font-weight: bold; }
+.otbl .yes-b    { background: #5B8DB8; color: #fff; font-weight: bold; }
+.otbl .empty    { background: #fff; }
+
+/* Fit an image into all available slide space, preserving aspect ratio */
+.fit {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  height: 82vh;      /* slide area minus the h2 title */
+  object-fit: contain;
+}
+
+/* Progressive reveal on the sampling/encoding diagram.
+   Background is consort_all.png (contain); white overlays hide lower rows. */
+.samp-slide .samp-cover-bc,
+.samp-slide .samp-cover-c {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+}
+.samp-slide .samp-cover-bc { top: 21%; }   /* hides B + C rows */
+.samp-slide .samp-cover-c  { top: 72%; }   /* hides only C row */
+
+/* Waterfall progressive reveal */
+.wf-slide .wf-cover-bcd,
+.wf-slide .wf-cover-cd,
+.wf-slide .wf-cover-d {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+}
+.wf-slide .wf-cover-bcd { top: 24%; }  /* show only panel A */
+.wf-slide .wf-cover-cd  { top: 46%; }  /* show A + B */
+.wf-slide .wf-cover-d   { top: 70%; }  /* show A + B + C */
+</style>

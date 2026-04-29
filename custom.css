@@ -1,0 +1,40 @@
+.remark-slide-content {
+  padding: 2px 5px 2px 5px;
+}
+
+.remark-slide-content p {
+  margin: 0;
+}
+
+.small-title {
+  font-size: 0.85em;
+  font-weight: bold;
+  margin: 0 0 0 0;
+  line-height: 1.1;
+  text-align: left;
+  color: #333;
+}
+
+.remark-slide-content p {
+  margin: 0;
+}
+
+.remark-slide-content img {
+  max-width: 100%;
+}
+
+.back-link {
+  position: absolute;
+  top: 4px;
+  right: 15px;
+  font-size: 0.7em;
+}
+
+.back-link a {
+  color: #888;
+  text-decoration: none;
+}
+
+.back-link a:hover {
+  color: #333;
+}

@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Beyond Publication Bias</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Fernando Hoces de la Guardia, Edward Miguel, Akash Shaji, Viviane H. Silva da Rocha, Gufran Pathan, Erik Ø. Sørensen, Bertil Tungodden" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <style>
+    .focus-lit { margin-bottom: 0.6em; }
+    .tyof-bar {
+      width: 90%;
+      height: 60px;
+      margin: 0.4em auto 0 auto;
+      display: flex;
+    }
+    .tyof-obs       { width: 80%; background: #E0E0E0; }
+    .tyof-rct       { width: 20%; background: #E0E0E0; }
+    .tyof-rct-blue  { width: 20%; background: #000080; }
+    .tyof-label,
+    .tyof-label-white {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 20px;
+    }
+    .tyof-label-white { color: #fff; }
+    .tyof-dashed {
+      height: 42px;
+      margin: 0 auto;
+      border: 1.5px dashed #333;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 22px;
+    }
+    .tyof-dashed-full  { width: 90%; }
+    .tyof-dashed-right {
+      width: 18%;
+      margin-right: 5%;
+      margin-left: auto;
+      margin-top: 2px;
+    }
+    .phantom   { visibility: hidden; }
+    .phantom li { list-style: none; }
+
+    /* Small badge link (bottom-right, above page number) */
+    .badge-link {
+      position: absolute;
+      bottom: 80px;
+      right: 20px;
+      font-size: 11px;
+      padding: 3px 8px;
+      background: #e8e8e8;
+      color: #444;
+      border-radius: 3px;
+      text-decoration: none;
+      z-index: 100;
+    }
+    .badge-link:hover { background: #ccc; }
+
+    /* Contributions slide styling */
+    .contrib h2 { margin-bottom: 0.3em; }
+    .contrib p, .contrib ul { font-size: 24px; line-height: 1.8; }
+    .hi-num { color: #c0392b; font-weight: bold; }
+
+    /* Regression table */
+    .reg-tbl             { border-collapse: collapse; width: 95%; margin: 0 auto; font-size: 22px; position: relative; top: -20px; }
+    .reg-tbl th          { padding: 6px 14px; text-align: center; font-weight: normal; }
+    .reg-tbl thead tr:last-child th { border-bottom: 2px solid #333; }
+    .reg-tbl td          { padding: 5px 14px; text-align: center; border: none; }
+    .reg-tbl td:first-child { text-align: left; }
+    .reg-tbl tbody tr:last-child td { border-bottom: 2px solid #333; }
+
+    /* Registration descriptives table */
+    /* Priors progressive reveal — cover right panel */
+    .priors-slide .priors-cover-b {
+      position: absolute;
+      top: 14%;
+      right: 0;
+      bottom: 0;
+      left: 51%;
+      background: #fff;
+    }
+
+    /* RR slide — text on the left, image as background on the right */
+    .rr-text {
+      width: 38%;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    /* Red highlight boxes for RR progressive reveal */
+    .rr-highlight {
+      position: absolute;
+      border: 3px solid red;
+      z-index: 10;
+      pointer-events: none;
+    }
+    /* Image sits at right 3%, 43% wide → left edge at ~54% */
+    .rr-hl-title    { top: 0%;  left: 55%;  width: 16%; height: 8%; }
+    .rr-hl-hyp      { top: 16%; left: 55%;  width: 43%; height: 18%; }
+    .rr-hl-details  { top: 9%;  left: 55%;  width: 43%; height: 5%; }
+    .rr-hl-est      { top: 40%; left: 55%;  width: 43%; height: 16%; }
+    .rr-hl-het      { top: 60%; left: 55%;  width: 43%; height: 30%; }
+
+    /* Engagement table */
+    .eng-tbl             { border-collapse: collapse; width: 98%; margin: 1em auto; font-size: 24px; }
+    .eng-tbl th          { padding: 8px 16px; text-align: center; font-weight: normal; }
+    .eng-tbl thead tr:last-child th { border-bottom: 2px solid #333; }
+    .eng-tbl td          { padding: 14px 16px; text-align: center; border: none; }
+    .eng-tbl td:first-child { text-align: left; font-style: italic; }
+    .eng-tbl tbody tr:last-child td { font-weight: bold; font-style: normal; }
+
+    /* File drawer bullets pinned from top so first bullet stays in place */
+    .fd-bullets {
+      position: absolute;
+      top: 66%;
+      left: 40px;
+      right: 40px;
+      font-size: 22px;
+    }
+    .fd-bullets li {
+      margin-bottom: 8px;
+    }
+
+    /* Team headshot collage — scattered */
+    .team-collage img {
+      width: 110px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      position: absolute;
+    }
+
+    /* Evidence-to-Policy flow diagram */
+    .e2p-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 13px;
+    }
+    .e2p-arrow { font-size: 20px; color: #888; }
+    .e2p-tri {
+      width: 70px; height: 70px;
+      border-left: 35px solid transparent;
+      border-right: 35px solid transparent;
+      border-bottom: 60px solid #ddd;
+      text-align: center;
+      position: relative;
+    }
+    .e2p-tri span {
+      position: absolute;
+      top: 25px;
+      left: -20px;
+      width: 40px;
+      font-size: 11px;
+      text-align: center;
+    }
+    .e2p-circ {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      border: 1.5px solid #888;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 12px;
+      position: relative;
+      background: #fff;
+    }
+    .e2p-circ-sm {
+      width: 65px; height: 65px;
+      font-size: 11px;
+    }
+    .e2p-rect {
+      border: 1.5px solid #888;
+      border-radius: 4px;
+      padding: 6px 10px;
+      font-size: 12px;
+      text-align: center;
+    }
+    .e2p-block {
+      position: absolute;
+      width: 35px; height: 55px;
+      background: #000;
+      transform: rotate(25deg);
+      top: -10px; left: 20px;
+      z-index: 2;
+    }
+    .e2p-branch {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-left: 5px;
+    }
+    .e2p-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .desc-tbl            { border-collapse: collapse; width: 95%; margin: 0 auto; font-size: 18px; }
+    .desc-tbl td:first-child { white-space: nowrap; }
+    .full-tbl-slide { padding: 0.5em 1em !important; }
+    .full-tbl-slide h2 { font-size: 22px; margin-bottom: 0.2em; }
+    .desc-tbl th         { border-bottom: 2px solid #333; padding: 3px 10px; text-align: right; }
+    .desc-tbl th:first-child { text-align: left; }
+    .desc-tbl td         { padding: 2px 10px; text-align: right; border: none; }
+    .desc-tbl td:first-child { text-align: left; }
+    .desc-tbl .panel-hdr td {
+      font-weight: bold;
+      padding-top: 10px;
+      padding-bottom: 2px;
+      border-bottom: 1px solid #999;
+      text-align: left;
+    }
+    .grey      { color: #ccc; }
+
+    /* ---------- Sample & standardization flow ---------- */
+    .samp-sec   { margin: 0.4em 0; font-size: 13px; }
+    .samp-tag   { font-weight: bold; font-size: 14px; margin-bottom: 4px; }
+    .samp-flow  { display: flex; align-items: center; gap: 6px; }
+    .samp-box   {
+      padding: 6px 8px;
+      border: 1px solid #777;
+      text-align: center;
+      line-height: 1.2;
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+    }
+    .samp-light   { background: #F2F2F2; }
+    .samp-dark    { background: #333; color: #fff; font-weight: bold; }
+    .samp-green   { background: #DDEED9; }
+    .samp-blue    { background: #D9E3F1; }
+    .samp-excl    { text-align: left; font-size: 11px; min-width: 150px; }
+    .samp-tiny    { font-size: 11px; min-width: 90px; }
+    .samp-arrow   { font-size: 22px; color: #555; }
+    .samp-g0, .samp-g1 {
+      border: 1px solid #777;
+      padding: 8px;
+      background: #FFF;
+      font-size: 11px;
+      min-width: 140px;
+      text-align: center;
+    }
+    .samp-g0 { background: #EAF5E6; }
+    .samp-g1 { background: #EBF1F9; }
+    .samp-brace {
+      display: flex;
+      justify-content: space-around;
+      font-style: italic;
+      color: #555;
+      margin-top: 2px;
+      font-size: 14px;
+    }
+    .samp-brace span:first-child { margin-left: 15%; }
+    .samp-brace span:last-child  { margin-right: 10%; }
+    .samp-final {
+      margin: 0.6em auto 0 auto;
+      width: fit-content;
+      padding: 10px 20px;
+      background: #333;
+      color: #fff;
+      font-weight: bold;
+      font-size: 16px;
+      border-radius: 4px;
+    }
+    .samp-on    { opacity: 1; }
+    .samp-muted { opacity: 0.25; }
+    .samp-off   { visibility: hidden; }
+
+    .consort-row {
+      display: block;
+      width: 95%;
+      margin: 4px auto;
+    }
+    .consort-hide { visibility: hidden; }
+
+    /* Three-column layout for outcomes */
+    .three-col {
+      display: flex;
+      gap: 16px;
+      width: 100%;
+      align-items: flex-start;
+      margin-top: 0.5em;
+    }
+    .three-col .col {
+      flex: 1;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .three-col .col-title {
+      font-weight: bold;
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+    .three-col .col img {
+      width: 100%;
+      height: 55vh;
+      object-fit: contain;
+      object-position: top;
+    }
+    .three-col .otbl          { font-size: 18px; }
+    .three-col .otbl td       { padding: 14px 8px; }
+    .three-col .otbl th       { padding: 6px 8px; }
+    .three-col .col .small    { margin-top: 20px; font-size: 16px; }
+
+    /* Outcome definition tables */
+    .otbl           { border-collapse: collapse; width: 100%; font-size: 14px; }
+    .otbl th        { font-weight: normal; padding: 4px 6px; border-bottom: 2px solid #333; }
+    .otbl td        { padding: 8px 6px; border: 1px solid #bbb; text-align: center; }
+    .otbl .hyp      { background: #E8F0E0; text-align: left; }
+    .otbl .zig      { background: #E8F0E0; color: #999; font-style: italic; }
+    .otbl .yes-g    { background: #6B9E4F; color: #fff; font-weight: bold; }
+    .otbl .no-w     { background: #fff; }
+    .otbl .yes-dg   { background: #4E7A35; color: #fff; font-weight: bold; }
+    .otbl .no-b     { background: #7BAAD4; color: #fff; font-weight: bold; }
+    .otbl .yes-b    { background: #5B8DB8; color: #fff; font-weight: bold; }
+    .otbl .empty    { background: #fff; }
+
+    /* Fit an image into all available slide space, preserving aspect ratio */
+    .fit {
+      display: block;
+      margin: 0 auto;
+      width: 100%;
+      height: 82vh;      /* slide area minus the h2 title */
+      object-fit: contain;
+    }
+
+    /* Progressive reveal on the sampling/encoding diagram.
+       Background is consort_all.png (contain); white overlays hide lower rows. */
+    .samp-slide .samp-cover-bc,
+    .samp-slide .samp-cover-c {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #fff;
+    }
+    .samp-slide .samp-cover-bc { top: 21%; }   /* hides B + C rows */
+    .samp-slide .samp-cover-c  { top: 72%; }   /* hides only C row */
+
+    /* Waterfall progressive reveal */
+    .wf-slide .wf-cover-bcd,
+    .wf-slide .wf-cover-cd,
+    .wf-slide .wf-cover-d {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #fff;
+    }
+    .wf-slide .wf-cover-bcd { top: 24%; }  /* show only panel A */
+    .wf-slide .wf-cover-cd  { top: 46%; }  /* show A + B */
+    .wf-slide .wf-cover-d   { top: 70%; }  /* show A + B + C */
+    </style>
+    <link rel="stylesheet" href="../custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+class: center, middle
+
+# Beyond Publication Bias:
+## Characterizing and Understanding Missing Results in Economics
+
+&lt;span style="font-size: 80%; text-decoration: underline;"&gt;Fernando Hoces de la Guardia&lt;/span&gt;&lt;span style="font-size: 80%;"&gt;, Edward Miguel, Akash Shaji,&lt;br/&gt;
+Viviane H. Silva da Rocha, Gufran Pathan, Erik Ø. Sørensen, Bertil Tungodden&lt;/span&gt;
+
+&lt;br/&gt;
+
+.small[BITSS Annual Meeting — 2026]
+
+---
+
+## Think of Your Own Field in Economics
+
+&amp;nbsp;
+
+---
+count: false
+
+## Think of Your Own Field in Economics
+
+.focus-lit[Focus only on **causal** questions answered in the literature.]
+
+&lt;div class="tyof-bar"&gt;
+  &lt;div class="tyof-obs"&gt;&lt;/div&gt;
+  &lt;div class="tyof-rct"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+Each answer can be thought of as an estimate of a question of the form:
+
+`$$E[Y \mid X = x_1] \; - \; E[Y \mid X = x_0]$$`
+
+.phantom[(1) Can we observe **all** the questions from the *original* research design? No.]
+
+.phantom[(2) What fraction of original questions are never reported on? Don't know.]
+
+---
+count: false
+
+## Think of Your Own Field in Economics
+
+.focus-lit[Focus only on **causal** questions answered in the literature.]
+
+&lt;div class="tyof-bar"&gt;
+  &lt;div class="tyof-obs"&gt;&lt;/div&gt;
+  &lt;div class="tyof-rct"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="tyof-dashed tyof-dashed-full"&gt;&lt;span&gt;?&lt;/span&gt;&lt;/div&gt;
+
+Each answer can be thought of as an estimate of a question of the form:
+
+`$$E[Y \mid X = x_1] \; - \; E[Y \mid X = x_0]$$`
+
+(1) Can we observe **all** the questions from the *original* research design?
+
+(2) What fraction of original questions are never reported on?
+
+---
+count: false
+
+## Think of Your Own Field in Economics
+
+.focus-lit[Focus only on **causal** questions answered in the literature.]
+
+&lt;div class="tyof-bar"&gt;
+  &lt;div class="tyof-obs"&gt;&lt;/div&gt;
+  &lt;div class="tyof-rct"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="tyof-dashed tyof-dashed-full"&gt;&lt;span&gt;?&lt;/span&gt;&lt;/div&gt;
+
+Each answer can be thought of as an estimate of a question of the form:
+
+`$$E[Y \mid X = x_1] \; - \; E[Y \mid X = x_0]$$`
+
+(1) Can we observe **all** the questions from the *original* research design? **No.**
+
+(2) What fraction of original questions are never reported on? **Don't know.**
+
+`\(\Rightarrow\)` Widespread belief that most *available* results are statistically significant.
+
+`\(\Rightarrow\)` If true, raises the likelihood that "most research findings are false" .grey[(Ioannidis, 2005)].
+
+---
+count: false
+
+## Think of Your Own Field in Economics
+
+.focus-lit[Focus only on **causal** questions answered in the literature.]
+
+&lt;div class="tyof-bar"&gt;
+  &lt;div class="tyof-obs tyof-label"&gt;Observational&lt;/div&gt;
+  &lt;div class="tyof-rct-blue tyof-label-white"&gt;RCTs&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="tyof-dashed tyof-dashed-right"&gt;&lt;/div&gt;
+
+Each answer can be thought of as an estimate of a question of the form:
+
+`$$E[Y \mid X = x_1] \; - \; E[Y \mid X = x_0]$$`
+
+(1) Can we observe **all** the questions from the *original* research design? **No.**
+
+(2) What fraction of original questions are never reported on? **Don't know.**
+
+.small[But now, for **randomized control trials**, the answer to (1) is **yes** — and we can start to answer (2).]
+
+---
+class: contrib
+
+## Contributions
+
+We develop an approach to **standardize and record hypotheses** from the AEA Registry, and run an RCT on study authors to answer:
+
+--
+
+**Q1. What fraction of pre-registered hypotheses have available results after 8–9 years per study?**
+  - Conditional on available, what fraction are null?
+
+--
+
+**Q2. What prevents researchers from reporting missing pre-registered results?**
+  - Lack of *awareness*?
+  - Lack of *engagement*?
+  - Lack of *resources*?
+
+&lt;div style="margin-top: -15px; visibility: hidden; font-size: 24px;"&gt;.hi-num[Our stronger intervention helps explain between a quarter and a third of the File Drawer (28%).]&lt;/div&gt;
+
+---
+
+class: center, middle, samp-slide
+background-image: url("figs/consort_all.png")
+background-size: contain
+background-position: center
+background-repeat: no-repeat
+
+&lt;div class="samp-cover-bc"&gt;&lt;/div&gt;
+
+---
+count: false
+class: center, middle, samp-slide
+background-image: url("figs/consort_all.png")
+background-size: contain
+background-position: center
+background-repeat: no-repeat
+
+&lt;div class="samp-cover-c"&gt;&lt;/div&gt;
+
+---
+count: false
+class: center, middle, samp-slide
+background-image: url("figs/consort_all.png")
+background-size: contain
+background-position: center
+background-repeat: no-repeat
+
+---
+count: false
+class: center, middle, samp-slide
+background-image: url("figs/consort_all.png")
+background-size: contain
+background-position: center
+background-repeat: no-repeat
+
+&lt;div style="position: absolute; bottom: 60px; right: 40px; text-align: right; font-size: 29px; color: #c0392b; font-weight: bold;"&gt;
+Stage 1: Humans only (intentionally no LLM)&lt;br/&gt;
+Stage 2: Explore use of LLM (ongoing, not in this paper)
+&lt;/div&gt;
+
+---
+
+## Main Outcomes
+
+.three-col[
+.col[
+.col-title[Fraction *Available*]
+&lt;table class="otbl"&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Available&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H1&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="yes-g"&gt;Yes&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H2&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="yes-g"&gt;Yes&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H3&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="no-w"&gt;No&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H4&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="no-w"&gt;No&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+]
+.col[
+.phantom[.col-title[Fraction *Null*]
+&lt;table class="otbl"&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Available&lt;/th&gt;&lt;th&gt;Null&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H1&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="yes-g"&gt;Yes&lt;/td&gt;&lt;td class="no-w"&gt;No&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H2&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="yes-g"&gt;Yes&lt;/td&gt;&lt;td class="yes-dg"&gt;Yes&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H3&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="no-w"&gt;No&lt;/td&gt;&lt;td class="empty"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H4&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="no-w"&gt;No&lt;/td&gt;&lt;td class="empty"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;]
+]
+.col[
+.phantom[.col-title[Fraction *Explained*]
+&lt;table class="otbl"&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Avail.&lt;/th&gt;&lt;th&gt;Null&lt;/th&gt;&lt;th&gt;Explained&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H1&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="no-w"&gt;Yes&lt;/td&gt;&lt;td class="no-w"&gt;No&lt;/td&gt;&lt;td class="empty"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H2&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="no-w"&gt;Yes&lt;/td&gt;&lt;td class="no-w"&gt;Yes&lt;/td&gt;&lt;td class="empty"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H3&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="no-w"&gt;No&lt;/td&gt;&lt;td class="empty"&gt;&lt;/td&gt;&lt;td class="no-w"&gt;No&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H4&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="yes-b"&gt;No&lt;/td&gt;&lt;td class="yes-b"&gt;&lt;/td&gt;&lt;td class="yes-b"&gt;Yes&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;]
+]
+]
+
+---
+count: false
+
+## Main Outcomes
+
+.three-col[
+.col[
+.col-title[Fraction *Available*]
+&lt;table class="otbl"&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Available&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H1&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="yes-g"&gt;Yes&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H2&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="yes-g"&gt;Yes&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H3&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="no-w"&gt;No&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H4&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="no-w"&gt;No&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+]
+.col[
+.col-title[Fraction *Null*]
+&lt;table class="otbl"&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Available&lt;/th&gt;&lt;th&gt;Null&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H1&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="yes-g"&gt;Yes&lt;/td&gt;&lt;td class="no-w"&gt;No&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H2&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="yes-g"&gt;Yes&lt;/td&gt;&lt;td class="yes-dg"&gt;Yes&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H3&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="no-w"&gt;No&lt;/td&gt;&lt;td class="empty"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H4&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="no-w"&gt;No&lt;/td&gt;&lt;td class="empty"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+.small[Denominator varies between descriptive (conditional) and causal analysis (unconditional).]
+]
+.col[
+.phantom[.col-title[Fraction *Explained*]
+&lt;table class="otbl"&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Avail.&lt;/th&gt;&lt;th&gt;Null&lt;/th&gt;&lt;th&gt;Explained&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H1&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="no-w"&gt;Yes&lt;/td&gt;&lt;td class="no-w"&gt;No&lt;/td&gt;&lt;td class="empty"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H2&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="no-w"&gt;Yes&lt;/td&gt;&lt;td class="no-w"&gt;Yes&lt;/td&gt;&lt;td class="empty"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H3&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="no-w"&gt;No&lt;/td&gt;&lt;td class="empty"&gt;&lt;/td&gt;&lt;td class="no-w"&gt;No&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H4&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="yes-b"&gt;No&lt;/td&gt;&lt;td class="yes-b"&gt;&lt;/td&gt;&lt;td class="yes-b"&gt;Yes&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;]
+]
+]
+
+---
+count: false
+name: outcomes
+
+## Main Outcomes
+
+.three-col[
+.col[
+.col-title[Fraction *Available*]
+&lt;table class="otbl"&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Available&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H1&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="yes-g"&gt;Yes&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H2&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="yes-g"&gt;Yes&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H3&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="no-w"&gt;No&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H4&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="no-w"&gt;No&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+]
+.col[
+.col-title[Fraction *Null*]
+&lt;table class="otbl"&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Available&lt;/th&gt;&lt;th&gt;Null&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H1&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="yes-g"&gt;Yes&lt;/td&gt;&lt;td class="no-w"&gt;No&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H2&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="yes-g"&gt;Yes&lt;/td&gt;&lt;td class="yes-dg"&gt;Yes&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H3&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="no-w"&gt;No&lt;/td&gt;&lt;td class="empty"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H4&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="no-w"&gt;No&lt;/td&gt;&lt;td class="empty"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+.small[Denominator varies between descriptive (conditional) and causal analysis (unconditional).]
+]
+.col[
+.col-title[Fraction *Explained*]
+&lt;table class="otbl"&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Avail.&lt;/th&gt;&lt;th&gt;Null&lt;/th&gt;&lt;th&gt;Explained&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H1&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="no-w"&gt;Yes&lt;/td&gt;&lt;td class="no-w"&gt;No&lt;/td&gt;&lt;td class="empty"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H2&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="no-w"&gt;Yes&lt;/td&gt;&lt;td class="no-w"&gt;Yes&lt;/td&gt;&lt;td class="empty"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H3&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="no-w"&gt;No&lt;/td&gt;&lt;td class="empty"&gt;&lt;/td&gt;&lt;td class="no-w"&gt;No&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="hyp"&gt;H4&lt;/td&gt;&lt;td class="zig"&gt;/\/\/\/&lt;/td&gt;&lt;td class="yes-b"&gt;No&lt;/td&gt;&lt;td class="yes-b"&gt;&lt;/td&gt;&lt;td class="yes-b"&gt;Yes&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+.small[Types of explanation range from logistical to analytical (more later).]
+]
+]
+
+&lt;a href="#reg-descriptives" class="badge-link"&gt;Registration descriptives&lt;/a&gt;
+&lt;a href="#reg-descriptives-encoders" class="badge-link" style="bottom: 100px;"&gt;Registration Descriptives Across Encoders&lt;/a&gt;
+
+---
+class: center, middle
+count: false
+
+# Main Finding #1: &lt;br/&gt; Characterizing The File Drawer &lt;br/&gt; for RCTs in Economics
+
+---
+name: main-waterfall
+class: center, middle, wf-slide
+background-image: url("figs/waterfall_all_hyp.png")
+background-size: contain
+background-position: center
+background-repeat: no-repeat
+
+&lt;div class="wf-cover-bcd"&gt;&lt;/div&gt;
+
+---
+count: false
+class: center, middle, wf-slide
+background-image: url("figs/waterfall_all_hyp.png")
+background-size: contain
+background-position: center
+background-repeat: no-repeat
+
+&lt;div class="wf-cover-cd"&gt;&lt;/div&gt;
+
+---
+count: false
+class: center, middle, wf-slide
+background-image: url("figs/waterfall_all_hyp.png")
+background-size: contain
+background-position: center
+background-repeat: no-repeat
+
+&lt;div class="wf-cover-d"&gt;&lt;/div&gt;
+
+---
+count: false
+class: center, middle, wf-slide
+background-image: url("figs/waterfall_all_hyp.png")
+background-size: contain
+background-position: center
+background-repeat: no-repeat
+
+---
+count: false
+
+## File Drawer Size: 58%
+
+### Most Hypotheses Are Not Reported 8–9 Years After Registration
+
+&lt;img src="figs/waterfall_last_panel.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Among Available Hypotheses: What Fraction of Results Are Null?
+
+---
+count: false
+name: null-dist
+
+## Among Available Hypotheses: What Fraction of Results Are Null?
+
+&lt;img src="figs/fig_null_cond_hist_all_v2_without_priors.png" width="85%" style="display: block; margin: auto;" /&gt;
+
+.small[Lots of null results reported: **64.3%**. Goes against priors that support the idea "Most Published Research is False" (Ioannidis, 2005).]
+
+---
+
+## Surprising? Comparing Estimates to Expert Priors
+
+---
+count: false
+class: priors-slide
+background-image: url("figs/combined_hist_priors.png")
+background-size: 90%
+background-position: center 65%
+background-repeat: no-repeat
+
+## Surprising? Comparing Estimates to Expert Priors
+
+&lt;div class="priors-cover-b"&gt;&lt;/div&gt;
+
+---
+count: false
+name: priors-main
+class: priors-slide
+background-image: url("figs/combined_hist_priors.png")
+background-size: 90%
+background-position: center 65%
+background-repeat: no-repeat
+
+## Surprising? Comparing Estimates to Expert Priors
+
+&lt;a href="#priors-groups" class="badge-link" style="bottom: auto; top: 15px; right: 20px;"&gt;Additional Prior-Data&lt;br/&gt;Comparisons&lt;/a&gt;
+&lt;a href="#avail-null-chars" class="badge-link" style="bottom: auto; top: 55px; right: 20px;"&gt;Availability and Null&lt;br/&gt;Across Characteristics&lt;/a&gt;
+
+&lt;div style="position: absolute; bottom: 25px; left: 20px; font-size: 16px; color: #555;"&gt;Bars = distribution of expert priors.&lt;/div&gt;
+
+---
+count: false
+class: contrib
+
+## Contributions
+
+We develop an approach to **standardize and record hypotheses** from the AEA Registry, and run an RCT on study authors to answer:
+
+**Q1. What fraction of pre-registered hypotheses have available results after 8–9 years per study?**
+  - Conditional on available, what fraction are null?
+
+**Q2. What prevents researchers from reporting missing pre-registered results?**
+  - Lack of *awareness*?
+  - Lack of *engagement*?
+  - Lack of *resources*?
+
+&lt;div style="margin-top: -15px; visibility: hidden; font-size: 24px;"&gt;.hi-num[Our stronger intervention helps explain between a quarter and a third of the File Drawer (28%).]&lt;/div&gt;
+
+---
+count: false
+class: contrib
+
+## Contributions
+
+We develop an approach to **standardize and record hypotheses** from the AEA Registry, and run an RCT on study authors to answer:
+
+**Q1. What fraction of pre-registered hypotheses have available results after 8–9 years per study?** .hi-num[42% → File Drawer of 58%]
+  - Conditional on available, what fraction are null? .hi-num[64%]
+
+**Q2. What prevents researchers from reporting missing pre-registered results?**
+  - Lack of *awareness*?
+  - Lack of *engagement*?
+  - Lack of *resources*?
+
+&lt;div style="margin-top: -15px; visibility: hidden; font-size: 24px;"&gt;.hi-num[Our stronger intervention helps explain between a quarter and a third of the File Drawer (28%).]&lt;/div&gt;
+
+---
+count: false
+class: contrib
+
+## Contributions
+
+We develop an approach to **standardize and record hypotheses** from the AEA Registry, and run an RCT on study authors to answer:
+
+.grey[**Q1. What fraction of pre-registered hypotheses have available results after 8–9 years per study?** .hi-num[42% → File Drawer of 58%]
+  - Conditional on available, what fraction are null? .hi-num[64%]]
+
+**Q2. What prevents researchers from reporting missing pre-registered results?**
+  - Lack of *awareness*?
+  - Lack of *engagement*?
+  - Lack of *resources*?
+
+&lt;div style="margin-top: -15px; visibility: hidden; font-size: 24px;"&gt;.hi-num[Our stronger intervention helps explain between a quarter and a third of the File Drawer (28%).]&lt;/div&gt;
+
+---
+count: false
+class: center, middle
+background-image: url("figs/consort_with_rct.png")
+background-size: contain
+background-position: center
+background-repeat: no-repeat
+
+---
+
+## What Can Be Done to Encourage More Reporting
+
+What are the main constraints preventing researchers from reporting?
+
+--
+
+- Lack of information about expectation from the scientific community in general? → ***"Awareness" constraint.***
+
+--
+
+- Lack of time or perceived low interest in one's own research, combined with limited direct engagement from the scientific community → ***"Engagement" constraint.***
+
+--
+
+- Lack of resources when asked to report on pre-registered hypotheses in a standardized fashion → ***"Resource" constraint.***
+
+--
+
+### Interventions and arms
+
+| Interventions / Arms | Control | Awareness | Engagement | Resources |
+|---|:-:|:-:|:-:|:-:|
+| Email + encouragement |   | ✓ | ✓ | ✓ |
+| Empty **Results Report** |   | ✓ | ✓ | ✓ |
+| Pre-filled **RR** |   |   | ✓ | ✓ |
+| RA support (30h / $1,500) |   |   |   | ✓ |
+
+---
+name: rr-found-main
+class: rr-slide
+background-image: url("figs/rr_found.png")
+background-size: 43%
+background-position: right 3% center
+background-repeat: no-repeat
+
+## Sample Pre-Filled Results Report (RR)
+
+.rr-text[
+Only visible to the **Engagement** and **Resources** arms.
+
+Each pre-registered hypothesis gets a one-row block with:
+
+- statement *as we interpreted it* (authors confirm or correct),
+- closest matching result we found (β, SE, location),
+- pre-registered heterogeneity rows to verify.
+
+If a result could not be found, the same form asks the authors to fill it in or tell us why.
+]
+
+&lt;a href="#rr-notfound" class="badge-link" style="right: auto; left: 20px;"&gt;Results Not Found&lt;/a&gt;
+
+---
+count: false
+class: rr-slide
+background-image: url("figs/rr_found.png")
+background-size: 43%
+background-position: right 3% center
+background-repeat: no-repeat
+
+## Sample Pre-Filled Results Report (RR)
+
+&lt;div class="rr-highlight rr-hl-title"&gt;&lt;/div&gt;
+
+---
+count: false
+name: rr-details-main
+class: rr-slide
+background-image: url("figs/rr_found.png")
+background-size: 43%
+background-position: right 3% center
+background-repeat: no-repeat
+
+## Sample Pre-Filled Results Report (RR)
+
+&lt;div class="rr-highlight rr-hl-details"&gt;&lt;/div&gt;
+
+&lt;a href="#rr-details-backup" class="badge-link" style="right: auto; left: 20px;"&gt;Details&lt;/a&gt;
+
+---
+count: false
+class: rr-slide
+background-image: url("figs/rr_found.png")
+background-size: 43%
+background-position: right 3% center
+background-repeat: no-repeat
+
+## Sample Pre-Filled Results Report (RR)
+
+&lt;div class="rr-highlight rr-hl-hyp"&gt;&lt;/div&gt;
+
+---
+count: false
+
+## RR Zoom — Hypothesis
+
+&lt;img src="figs/rr_hyp.png" style="width: 90%; display: block; margin: auto; border: 3px solid red;" /&gt;
+
+---
+count: false
+class: rr-slide
+background-image: url("figs/rr_found.png")
+background-size: 43%
+background-position: right 3% center
+background-repeat: no-repeat
+
+## Sample Pre-Filled Results Report (RR)
+
+&lt;div class="rr-highlight rr-hl-est"&gt;&lt;/div&gt;
+
+---
+count: false
+
+## RR Zoom — Closest Result
+
+&lt;img src="figs/rr_est.png" style="width: 90%; display: block; margin: auto; border: 3px solid red;" /&gt;
+
+---
+count: false
+class: rr-slide
+background-image: url("figs/rr_found.png")
+background-size: 43%
+background-position: right 3% center
+background-repeat: no-repeat
+
+## Sample Pre-Filled Results Report (RR)
+
+&lt;div class="rr-highlight rr-hl-het"&gt;&lt;/div&gt;
+
+---
+count: false
+
+## RR Zoom — Heterogeneity
+
+&lt;img src="figs/rr_het.png" style="width: 90%; display: block; margin: auto; border: 3px solid red;" /&gt;
+
+---
+
+## Did Authors Engage with the Treatment?
+
+---
+count: false
+
+## Did Authors Engage with the Treatment?
+
+.center[Engagement following the intervention email]
+
+&lt;table class="eng-tbl"&gt;
+&lt;thead&gt;
+&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;&lt;/th&gt;&lt;th colspan="3" style="border-bottom: 1px solid #333;"&gt;Clicked on:&lt;/th&gt;&lt;th colspan="3" style="border-bottom: 1px solid #333;"&gt;Responded with email:&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;(1)&lt;/th&gt;&lt;th&gt;(2)&lt;/th&gt;&lt;th&gt;(3)&lt;/th&gt;&lt;th&gt;(4)&lt;/th&gt;&lt;th&gt;(5)&lt;/th&gt;&lt;th&gt;(6)&lt;/th&gt;&lt;th&gt;(7)&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Arm&lt;/th&gt;&lt;th&gt;N&lt;/th&gt;&lt;th&gt;Any&lt;br/&gt;(%)&lt;/th&gt;&lt;th&gt;Results&lt;br/&gt;(%)&lt;/th&gt;&lt;th&gt;Details.pdf&lt;br/&gt;(%)&lt;/th&gt;&lt;th&gt;Yes&lt;br/&gt;(%)&lt;/th&gt;&lt;th&gt;Informative&lt;br/&gt;(%)&lt;/th&gt;&lt;th&gt;No&lt;br/&gt;(%)&lt;/th&gt;&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;em&gt;Awareness&lt;/em&gt;&lt;/td&gt;&lt;td&gt;90&lt;/td&gt;&lt;td&gt;84.4&lt;/td&gt;&lt;td&gt;82.2&lt;/td&gt;&lt;td&gt;0.0&lt;/td&gt;&lt;td&gt;51.1&lt;/td&gt;&lt;td&gt;28.9&lt;/td&gt;&lt;td&gt;22.2&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;em&gt;Engagement&lt;/em&gt;&lt;/td&gt;&lt;td&gt;88&lt;/td&gt;&lt;td&gt;92.0&lt;/td&gt;&lt;td&gt;92.0&lt;/td&gt;&lt;td&gt;52.3&lt;/td&gt;&lt;td&gt;76.1&lt;/td&gt;&lt;td&gt;60.2&lt;/td&gt;&lt;td&gt;15.9&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;em&gt;Resources&lt;/em&gt;&lt;/td&gt;&lt;td&gt;88&lt;/td&gt;&lt;td&gt;90.9&lt;/td&gt;&lt;td&gt;90.9&lt;/td&gt;&lt;td&gt;47.7&lt;/td&gt;&lt;td&gt;69.3&lt;/td&gt;&lt;td&gt;50.0&lt;/td&gt;&lt;td&gt;19.3&lt;/td&gt;&lt;/tr&gt;
+&lt;tr style="border-top: 1.5px solid #333;"&gt;&lt;td&gt;Total&lt;/td&gt;&lt;td&gt;266&lt;/td&gt;&lt;td&gt;89.1&lt;/td&gt;&lt;td&gt;88.3&lt;/td&gt;&lt;td&gt;33.1&lt;/td&gt;&lt;td&gt;65.4&lt;/td&gt;&lt;td&gt;46.2&lt;/td&gt;&lt;td&gt;19.2&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+.small[*Note:* 14 studies expressed interest in RA Support through the Resources arm (2 via funds and 12 in time of Berkeley RAs). In practice, six took up the RA support from Berkeley but none followed up for the funds.]
+
+---
+name: te-main
+
+## Main Treatment Effects on Fraction Available
+
+&lt;img src="figs/y1_study_tretment_effect_dd.png" width="90%" style="margin-top: -20px;" style="display: block; margin: auto;" /&gt;
+
+.small[Awareness does not affect Availability. Engagement and Resources increase Availability by ~6–7pp. Additional resources on top of Engagement have no effect → pooling Engagement and Resources arms.]
+
+&lt;a href="#estimation" class="badge-link" style="bottom: auto; top: 15px; right: 20px;"&gt;Estimation &amp;&lt;br/&gt;Hypotheses&lt;/a&gt;
+
+---
+name: te-summary
+class: contrib
+
+## Main Treatment Effects
+
+- Awareness has no effect on Available or Null, but a 4pp effect on Explained (SE = 0.021).
+
+- Across all three outcomes, we cannot reject the hypothesis of no incremental effect of Resources → the specification that pools Engagement and Resources is preferred.
+
+- Effect of Pooled (Eng. or Res.):
+  - **Available:** 0.062 (SE = 0.015)
+  - **Null:** 0.042 (SE = 0.012)
+  - **Explained:** 0.094 (SE = 0.022)
+
+- The effect on Null (unconditional) is driven by more hypotheses being reported. The composition of newly reported results is identical to the pre-treatment distribution.
+
+&lt;a href="#reg-table-backup" class="badge-link" style="right: auto; left: 20px; bottom: 15px;"&gt;Full Regression Table&lt;/a&gt;
+&lt;a href="#null-by-treatment" class="badge-link" style="right: auto; left: 180px; bottom: 15px;"&gt;Null by Arms&lt;/a&gt;
+
+---
+
+name: types-explained
+## Types of Explained
+
+&lt;table class="reg-tbl"&gt;
+&lt;thead&gt;
+&lt;tr&gt;&lt;th style="text-align:left"&gt;Type of Explanation&lt;/th&gt;&lt;th&gt;Hypotheses&lt;/th&gt;&lt;th&gt;Studies&lt;/th&gt;&lt;th&gt;Estimate&lt;/th&gt;&lt;th&gt;SE&lt;/th&gt;&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr style="border-top: 1.5px solid #333;"&gt;&lt;td style="text-align:left"&gt;Failed or no intervention&lt;/td&gt;&lt;td&gt;18.2%&lt;/td&gt;&lt;td&gt;31.2%&lt;/td&gt;&lt;td&gt;0.050&lt;/td&gt;&lt;td&gt;(0.016)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;b&gt;+ Intervention, no data&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;31.2%&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;33.3%&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;0.094&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;(0.022)&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr style="border-top: 1px solid #999;"&gt;&lt;td style="text-align:left"&gt;+ Intervention, bad data&lt;/td&gt;&lt;td&gt;6.0%&lt;/td&gt;&lt;td&gt;6.2%&lt;/td&gt;&lt;td&gt;0.108&lt;/td&gt;&lt;td&gt;(0.023)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;+ Yes data, to-do analysis&lt;/td&gt;&lt;td&gt;20.4%&lt;/td&gt;&lt;td&gt;29.2%&lt;/td&gt;&lt;td&gt;0.120&lt;/td&gt;&lt;td&gt;(0.024)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;+ Yes data, but low power&lt;/td&gt;&lt;td&gt;19.4%&lt;/td&gt;&lt;td&gt;10.4%&lt;/td&gt;&lt;td&gt;0.132&lt;/td&gt;&lt;td&gt;(0.025)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;+ Disagree with authors&lt;/td&gt;&lt;td&gt;4.7%&lt;/td&gt;&lt;td&gt;6.2%&lt;/td&gt;&lt;td&gt;0.138&lt;/td&gt;&lt;td&gt;(0.025)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr style="border-top: 1.5px solid #333;"&gt;&lt;td style="text-align:left"&gt;Total &lt;em&gt;N&lt;/em&gt;&lt;/td&gt;&lt;td&gt;653&lt;/td&gt;&lt;td&gt;48&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+.small[Rows are cumulative. Estimates show the pooled (Engagement or Resources) treatment effect as each explanation category is added.]
+
+&lt;a href="#newly-available" class="badge-link" style="right: auto; left: 20px; bottom: 15px;"&gt;Newly Available&lt;/a&gt;
+
+---
+class: center, middle
+count: false
+
+# Main Finding #2: &lt;br/&gt; Understanding What is Behind &lt;br/&gt; Missing Results in Pre-Registered RCTs in Economics
+
+---
+
+background-image: url("figs/filedrawer_pre_all.png")
+background-size: 75%
+background-position: center 45%
+background-repeat: no-repeat
+
+## How Much of the File Drawer Can We Recover 8–9 Years After by Relaxing Constraints?
+
+---
+count: false
+background-image: url("figs/filedrawer_pre_t1.png")
+background-size: 75%
+background-position: center 45%
+background-repeat: no-repeat
+
+## How Much of the File Drawer Can We Recover 8–9 Years After by Relaxing Constraints?
+
+---
+count: false
+background-image: url("figs/filedrawer_post_t1.png")
+background-size: 75%
+background-position: center 45%
+background-repeat: no-repeat
+
+## How Much of the File Drawer Can We Recover 8–9 Years After by Relaxing Constraints?
+
+.fd-bullets[
+- *Awareness* only recovers a few explanations — 7% of the File Drawer (FD) (4pp/57pp)
+]
+
+---
+count: false
+background-image: url("figs/filedrawer_pre_t2t3.png")
+background-size: 75%
+background-position: center 45%
+background-repeat: no-repeat
+
+## How Much of the File Drawer Can We Recover 8–9 Years After by Relaxing Constraints?
+
+.fd-bullets[
+- *Awareness* only recovers a few explanations — 7% of the File Drawer (FD) (4pp/57pp)
+]
+
+---
+count: false
+background-image: url("figs/filedrawer_post_base.png")
+background-size: 75%
+background-position: center 45%
+background-repeat: no-repeat
+
+## How Much of the File Drawer Can We Recover 8–9 Years After by Relaxing Constraints?
+
+.fd-bullets[
+- *Awareness* only recovers a few explanations — 7% of the File Drawer (FD) (4pp/57pp)
+- *Engagement* makes 6pp of results available, reducing the FD by 10.5% (6pp/57pp)
+- It also uncovers explanations for 9pp — an additional 16.5% of the FD (9pp/57pp)
+- Taken together, this explains between a quarter and a third of the FD before the intervention (28% = 16pp/57pp)
+]
+
+---
+
+class: contrib
+
+## Contributions
+
+We develop an approach to **standardize and record hypotheses** from the AEA Registry, and run an RCT on study authors to answer:
+
+**Q1. What fraction of pre-registered hypotheses have available results after 8–9 years per study?** .hi-num[42% → File Drawer of 58%]
+  - Conditional on available, what fraction are null? .hi-num[64%]
+
+**Q2. What prevents researchers from reporting missing pre-registered results?**
+  - Lack of *awareness*?
+  - Lack of *engagement*?
+  - Lack of *resources*?
+
+&lt;div style="margin-top: -15px; visibility: hidden; font-size: 24px;"&gt;.hi-num[Our stronger intervention helps explain between a quarter and a third of the File Drawer (28%).]&lt;/div&gt;
+
+---
+count: false
+class: contrib
+
+## Contributions
+
+We develop an approach to **standardize and record hypotheses** from the AEA Registry, and run an RCT on study authors to answer:
+
+**Q1. What fraction of pre-registered hypotheses have available results after 8–9 years per study?** .hi-num[42% → File Drawer of 58%]
+  - Conditional on available, what fraction are null? .hi-num[64%]
+
+**Q2. What prevents researchers from reporting missing pre-registered results?**
+  - Lack of *awareness*? .hi-num[No effect on Available]
+  - Lack of *engagement*? .hi-num[Yes]
+  - Lack of *resources*? .hi-num[No additional effect]
+
+&lt;div style="margin-top: -15px; font-size: 24px;"&gt;.hi-num[Our stronger intervention helps explain between a quarter and a third of the File Drawer (28%).]&lt;/div&gt;
+
+---
+count: false
+class: center, middle, inverse
+
+&lt;div style="position: absolute; top: 15px; left: 0; right: 0; display: flex; justify-content: center; gap: 40px; align-items: center;"&gt;
+&lt;img src="figs/logos/logo1.png" style="height: 60px; object-fit: contain;"/&gt;
+&lt;img src="figs/logos/logo2.png" style="height: 60px; object-fit: contain;"/&gt;
+&lt;img src="figs/logos/logo3.png" style="height: 60px; object-fit: contain;"/&gt;
+&lt;/div&gt;
+
+# Thank You
+
+&lt;div class="team-collage"&gt;
+&lt;img src="figs/team/fernando-scaled-1-335x335.webp" style="top: 22%; left: 58%;"/&gt;
+&lt;img src="figs/team/s1579.jpg" style="top: 42%; left: 64%;"/&gt;
+&lt;img src="figs/team/Image_20231207_104934_948-scaled-1-335x335.webp" style="top: 62%; left: 58%;"/&gt;
+&lt;img src="figs/team/Copy-of-DSC05682-scaled-1-335x335.webp" style="top: 70%; left: 44%;"/&gt;
+&lt;img src="figs/team/IMG_2681-scaled-e1737074000170-335x335.webp" style="top: 62%; left: 30%;"/&gt;
+&lt;img src="figs/team/s1411.jpg" style="top: 42%; left: 24%;"/&gt;
+&lt;img src="figs/team/Copy-of-DSC05529-Edit-scaled-1-335x335.webp" style="top: 22%; left: 30%;"/&gt;
+&lt;img src="figs/team/JoWeech_Headshot_rsz-335x335.webp" style="top: 15%; left: 44%;"/&gt;
+&lt;/div&gt;
+
+&lt;div style="position: absolute; bottom: 15px; left: 20px; text-align: center;"&gt;
+&lt;span style="font-size: 16px; color: #fff;"&gt;Slides here:&lt;/span&gt;&lt;br/&gt;
+&lt;a href="https://fhoces.github.io/BITSS-AM-2026-slides/" style="font-size: 16px; color: #fff;"&gt;tinyurl.com/2al6e5vs&lt;/a&gt;&lt;br/&gt;
+&lt;img src="figs/qr_slides.png" style="width: 140px; border: none; background: white; padding: 4px;"/&gt;&lt;br/&gt;
+&lt;span style="font-size: 16px; color: #fff;"&gt;fhoces@berkeley.edu&lt;/span&gt;
+&lt;/div&gt;
+
+---
+count: false
+class: center, middle, inverse
+
+# Backup slides
+
+---
+count: false
+
+class: center, middle
+background-image: url("figs/e2p_slide.png")
+background-size: contain
+background-position: center
+background-repeat: no-repeat
+
+---
+count: false
+
+## Backup: Regression Specifications
+
+Main difference-in-differences:
+`$$Y_{it} = \mu_i + \delta_1 \mathbf{1}[t=1] + \sum_j \tau_j \, (T_{ij} \cdot \mathbf{1}[t=1]) + \varepsilon_{it}$$`
+
+Cross-sectional (post only):
+`$$Y_{i1} = \mu_0 + \sum_j \tau_j T_{ij} + \zeta_s + \varepsilon_{i1}$$`
+
+with `\(\zeta_s\)` = stratum (PAP × LMIC) fixed effects.
+
+Outcomes:
+- `\(Y_1\)`: fraction of pre-specified hypotheses completely available per study.
+- `\(Y_3\)`: fraction null (`\(p &gt; 0.05\)`) among available.
+
+---
+count: false
+name: rr-details-backup
+
+## Sample Pre-Filled Results Report (RR)
+
+&lt;a href="#rr-details-main" class="badge-link" style="right: auto; left: 20px;"&gt;Back&lt;/a&gt;
+
+&lt;img src="figs/rr_details_link.png" style="width: 80%; display: block; margin: -40px auto 4px auto;" /&gt;
+
+.pull-left[
+&lt;img src="figs/g0_pg1.png" style="width: 100%; border: 1px solid #ccc; margin-top: -40px;" /&gt;
+]
+
+.pull-right[
+&lt;img src="figs/g0_pg2.png" style="width: 100%; border: 1px solid #ccc; margin-top: -40px;" /&gt;
+]
+
+---
+count: false
+name: rr-notfound
+
+## Backup: RR When Result Not Found
+
+&lt;div style="margin-top: -50px;"&gt;
+.pull-left[
+&lt;img src="figs/rr_notfound.png" style="width: 100%; border: 1px solid #ccc;" /&gt;
+.small[*Sent to authors:* blank result + menu of reasons (didn't collect, not included in write-up, null, unfinished paper, missed by our team).]
+]
+
+.pull-right[
+&lt;img src="figs/rr_notfound_filled.png" style="width: 100%; border: 1px solid #ccc;" /&gt;
+.small[*Authors' reply:* fills in β, SE, p-value, and writes a short explanation — or flags that a result exists but wasn't included in the paper.]
+]
+&lt;/div&gt;
+
+&lt;a href="#rr-found-main" class="badge-link" style="right: auto; left: 20px;"&gt;Back to Results Found&lt;/a&gt;
+
+---
+count: false
+
+name: avail-null-chars
+
+## Availability and Null Across Characteristics
+
+&lt;table class="desc-tbl" style="position: relative; top: -40px;"&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th style="text-align:left"&gt;Categories&lt;/th&gt;&lt;th&gt;Available (%)&lt;/th&gt;&lt;th&gt;Null | Available (%)&lt;/th&gt;&lt;th&gt;N&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;All&lt;/td&gt;&lt;td&gt;42.2&lt;/td&gt;&lt;td&gt;64.5&lt;/td&gt;&lt;td&gt;317&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Pre-registrations with paper&lt;/td&gt;&lt;td&gt;52.2&lt;/td&gt;&lt;td&gt;64.5&lt;/td&gt;&lt;td&gt;256&lt;/td&gt;&lt;/tr&gt;
+&lt;tr class="panel-hdr"&gt;&lt;td colspan="4"&gt;B: Type of publication&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;Working paper&lt;/td&gt;&lt;td&gt;51.6&lt;/td&gt;&lt;td&gt;66.7&lt;/td&gt;&lt;td&gt;98&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;Published not top 5&lt;/td&gt;&lt;td&gt;55.6&lt;/td&gt;&lt;td&gt;65.5&lt;/td&gt;&lt;td&gt;125&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;Published top 5&lt;/td&gt;&lt;td&gt;41.3&lt;/td&gt;&lt;td&gt;51.3&lt;/td&gt;&lt;td&gt;31&lt;/td&gt;&lt;/tr&gt;
+&lt;tr class="panel-hdr"&gt;&lt;td colspan="4"&gt;C: Stringency of availability&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;In main body&lt;/td&gt;&lt;td&gt;35.0&lt;/td&gt;&lt;td&gt;61.1&lt;/td&gt;&lt;td&gt;317&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;No modifications&lt;/td&gt;&lt;td&gt;28.6&lt;/td&gt;&lt;td&gt;66.0&lt;/td&gt;&lt;td&gt;317&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;No mod. + main body&lt;/td&gt;&lt;td&gt;24.0&lt;/td&gt;&lt;td&gt;62.5&lt;/td&gt;&lt;td&gt;317&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;No mod + main body + not hard to find&lt;/td&gt;&lt;td&gt;19.7&lt;/td&gt;&lt;td&gt;64.3&lt;/td&gt;&lt;td&gt;317&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Only main hypotheses&lt;/td&gt;&lt;td&gt;44.9&lt;/td&gt;&lt;td&gt;64.4&lt;/td&gt;&lt;td&gt;317&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Study has heterogeneity: All&lt;/td&gt;&lt;td&gt;31.4&lt;/td&gt;&lt;td&gt;66.0&lt;/td&gt;&lt;td&gt;39&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;— Main Only&lt;/td&gt;&lt;td&gt;53.8&lt;/td&gt;&lt;td&gt;65.4&lt;/td&gt;&lt;td&gt;39&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;— Heterogeneity Only&lt;/td&gt;&lt;td&gt;22.3&lt;/td&gt;&lt;td&gt;64.2&lt;/td&gt;&lt;td&gt;39&lt;/td&gt;&lt;/tr&gt;
+&lt;tr class="panel-hdr"&gt;&lt;td colspan="4"&gt;D: Other characteristics&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Studies has PAP&lt;/td&gt;&lt;td&gt;44.4&lt;/td&gt;&lt;td&gt;67.3&lt;/td&gt;&lt;td&gt;127&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Studies in LMICs&lt;/td&gt;&lt;td&gt;37.8&lt;/td&gt;&lt;td&gt;64.3&lt;/td&gt;&lt;td&gt;206&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Most hypotheses clearly defined&lt;/td&gt;&lt;td&gt;43.6&lt;/td&gt;&lt;td&gt;67.4&lt;/td&gt;&lt;td&gt;100&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;More than 10 pre-registered hypotheses&lt;/td&gt;&lt;td&gt;32.3&lt;/td&gt;&lt;td&gt;68.8&lt;/td&gt;&lt;td&gt;137&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;a href="#priors-main" class="badge-link" style="right: auto; left: 20px;"&gt;Back to Priors&lt;/a&gt;
+
+---
+count: false
+
+name: reg-descriptives-encoders
+class: full-tbl-slide
+
+&lt;div style="display: flex; align-items: flex-start; gap: 0px; margin-top: 20px;"&gt;
+&lt;div style="min-width: 250px; margin-top: 40px;"&gt;
+&lt;h2 style="line-height: 1.3; font-size: 36px;"&gt;Registration Descriptives&lt;br/&gt;Across Encoders&lt;/h2&gt;
+&lt;/div&gt;
+&lt;table class="desc-tbl" style="width: auto;"&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th style="text-align:left"&gt;Dimension&lt;/th&gt;&lt;th&gt;Mean&lt;/th&gt;&lt;th&gt;e1&lt;/th&gt;&lt;th&gt;e2&lt;/th&gt;&lt;th&gt;e3&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class="panel-hdr"&gt;&lt;td colspan="5"&gt;Registration&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Number of studies&lt;/td&gt;&lt;td&gt;317&lt;/td&gt;&lt;td&gt;139&lt;/td&gt;&lt;td&gt;136&lt;/td&gt;&lt;td&gt;31&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Number of hypotheses&lt;/td&gt;&lt;td&gt;5,048&lt;/td&gt;&lt;td&gt;2,259&lt;/td&gt;&lt;td&gt;2,164&lt;/td&gt;&lt;td&gt;288&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Registered with PAP&lt;/td&gt;&lt;td&gt;0.40&lt;/td&gt;&lt;td&gt;0.38&lt;/td&gt;&lt;td&gt;0.41&lt;/td&gt;&lt;td&gt;0.42&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Has published paper&lt;/td&gt;&lt;td&gt;0.49&lt;/td&gt;&lt;td&gt;0.54&lt;/td&gt;&lt;td&gt;0.48&lt;/td&gt;&lt;td&gt;0.35&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Published in top 5&lt;/td&gt;&lt;td&gt;0.10&lt;/td&gt;&lt;td&gt;0.07&lt;/td&gt;&lt;td&gt;0.12&lt;/td&gt;&lt;td&gt;0.06&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;LMIC population&lt;/td&gt;&lt;td&gt;0.65&lt;/td&gt;&lt;td&gt;0.65&lt;/td&gt;&lt;td&gt;0.65&lt;/td&gt;&lt;td&gt;0.61&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Specifies heterogeneity&lt;/td&gt;&lt;td&gt;0.12&lt;/td&gt;&lt;td&gt;0.15&lt;/td&gt;&lt;td&gt;0.12&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr class="panel-hdr"&gt;&lt;td colspan="5"&gt;Elements per registration&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Interventions&lt;/td&gt;&lt;td&gt;3.13&lt;/td&gt;&lt;td&gt;3.17&lt;/td&gt;&lt;td&gt;3.12&lt;/td&gt;&lt;td&gt;2.61&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Arms&lt;/td&gt;&lt;td&gt;4.79&lt;/td&gt;&lt;td&gt;4.70&lt;/td&gt;&lt;td&gt;4.85&lt;/td&gt;&lt;td&gt;3.61&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Main outcomes&lt;/td&gt;&lt;td&gt;5.36&lt;/td&gt;&lt;td&gt;5.06&lt;/td&gt;&lt;td&gt;5.43&lt;/td&gt;&lt;td&gt;4.81&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Hypotheses / study&lt;/td&gt;&lt;td&gt;15.92&lt;/td&gt;&lt;td&gt;16.25&lt;/td&gt;&lt;td&gt;15.91&lt;/td&gt;&lt;td&gt;9.29&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Main hypotheses&lt;/td&gt;&lt;td&gt;11.77&lt;/td&gt;&lt;td&gt;11.54&lt;/td&gt;&lt;td&gt;11.82&lt;/td&gt;&lt;td&gt;9.29&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Primary het. hypotheses&lt;/td&gt;&lt;td&gt;4.15&lt;/td&gt;&lt;td&gt;4.71&lt;/td&gt;&lt;td&gt;4.09&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr class="panel-hdr"&gt;&lt;td colspan="5"&gt;Frac. of hyp. per registration&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Detailed (overall)&lt;/td&gt;&lt;td&gt;0.31&lt;/td&gt;&lt;td&gt;0.34&lt;/td&gt;&lt;td&gt;0.27&lt;/td&gt;&lt;td&gt;0.35&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Type: simple difference&lt;/td&gt;&lt;td&gt;0.91&lt;/td&gt;&lt;td&gt;0.89&lt;/td&gt;&lt;td&gt;0.92&lt;/td&gt;&lt;td&gt;1.00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Type: double difference&lt;/td&gt;&lt;td&gt;0.03&lt;/td&gt;&lt;td&gt;0.03&lt;/td&gt;&lt;td&gt;0.02&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Type: 'other'&lt;/td&gt;&lt;td&gt;0.06&lt;/td&gt;&lt;td&gt;0.07&lt;/td&gt;&lt;td&gt;0.06&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;a href="#outcomes" class="badge-link" style="right: auto; left: 20px;"&gt;Back to outcomes&lt;/a&gt;
+
+---
+count: false
+class: full-tbl-slide
+
+&lt;div style="display: flex; align-items: flex-start; gap: 0px; margin-top: 20px;"&gt;
+&lt;div style="min-width: 250px; margin-top: 40px;"&gt;
+&lt;h2 style="line-height: 1.3; font-size: 36px;"&gt;Registration Descriptives&lt;br/&gt;Across Encoders&lt;/h2&gt;
+&lt;ul style="font-size: 20px; margin-top: 20px; line-height: 1.5; max-width: 220px; padding-left: 20px;"&gt;&lt;li&gt;Among the 620 hypotheses where authors clicked agree/disagree with the statement, &lt;b&gt;82% agreed&lt;/b&gt; with our encoding.&lt;/li&gt;&lt;/ul&gt;
+&lt;/div&gt;
+&lt;table class="desc-tbl" style="width: auto;"&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th style="text-align:left"&gt;Dimension&lt;/th&gt;&lt;th&gt;Mean&lt;/th&gt;&lt;th&gt;e1&lt;/th&gt;&lt;th&gt;e2&lt;/th&gt;&lt;th&gt;e3&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class="panel-hdr"&gt;&lt;td colspan="5"&gt;Registration&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Number of studies&lt;/td&gt;&lt;td&gt;317&lt;/td&gt;&lt;td&gt;139&lt;/td&gt;&lt;td&gt;136&lt;/td&gt;&lt;td&gt;31&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Number of hypotheses&lt;/td&gt;&lt;td&gt;5,048&lt;/td&gt;&lt;td&gt;2,259&lt;/td&gt;&lt;td&gt;2,164&lt;/td&gt;&lt;td&gt;288&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Registered with PAP&lt;/td&gt;&lt;td&gt;0.40&lt;/td&gt;&lt;td&gt;0.38&lt;/td&gt;&lt;td&gt;0.41&lt;/td&gt;&lt;td&gt;0.42&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Has published paper&lt;/td&gt;&lt;td&gt;0.49&lt;/td&gt;&lt;td&gt;0.54&lt;/td&gt;&lt;td&gt;0.48&lt;/td&gt;&lt;td&gt;0.35&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Published in top 5&lt;/td&gt;&lt;td&gt;0.10&lt;/td&gt;&lt;td&gt;0.07&lt;/td&gt;&lt;td&gt;0.12&lt;/td&gt;&lt;td&gt;0.06&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;LMIC population&lt;/td&gt;&lt;td&gt;0.65&lt;/td&gt;&lt;td&gt;0.65&lt;/td&gt;&lt;td&gt;0.65&lt;/td&gt;&lt;td&gt;0.61&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Specifies heterogeneity&lt;/td&gt;&lt;td&gt;0.12&lt;/td&gt;&lt;td&gt;0.15&lt;/td&gt;&lt;td&gt;0.12&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr class="panel-hdr"&gt;&lt;td colspan="5"&gt;Elements per registration&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Interventions&lt;/td&gt;&lt;td&gt;3.13&lt;/td&gt;&lt;td&gt;3.17&lt;/td&gt;&lt;td&gt;3.12&lt;/td&gt;&lt;td&gt;2.61&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Arms&lt;/td&gt;&lt;td&gt;4.79&lt;/td&gt;&lt;td&gt;4.70&lt;/td&gt;&lt;td&gt;4.85&lt;/td&gt;&lt;td&gt;3.61&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Main outcomes&lt;/td&gt;&lt;td&gt;5.36&lt;/td&gt;&lt;td&gt;5.06&lt;/td&gt;&lt;td&gt;5.43&lt;/td&gt;&lt;td&gt;4.81&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Hypotheses / study&lt;/td&gt;&lt;td&gt;15.92&lt;/td&gt;&lt;td&gt;16.25&lt;/td&gt;&lt;td&gt;15.91&lt;/td&gt;&lt;td&gt;9.29&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Main hypotheses&lt;/td&gt;&lt;td&gt;11.77&lt;/td&gt;&lt;td&gt;11.54&lt;/td&gt;&lt;td&gt;11.82&lt;/td&gt;&lt;td&gt;9.29&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Primary het. hypotheses&lt;/td&gt;&lt;td&gt;4.15&lt;/td&gt;&lt;td&gt;4.71&lt;/td&gt;&lt;td&gt;4.09&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr class="panel-hdr"&gt;&lt;td colspan="5"&gt;Frac. of hyp. per registration&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Detailed (overall)&lt;/td&gt;&lt;td&gt;0.31&lt;/td&gt;&lt;td&gt;0.34&lt;/td&gt;&lt;td&gt;0.27&lt;/td&gt;&lt;td&gt;0.35&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Type: simple difference&lt;/td&gt;&lt;td&gt;0.91&lt;/td&gt;&lt;td&gt;0.89&lt;/td&gt;&lt;td&gt;0.92&lt;/td&gt;&lt;td&gt;1.00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Type: double difference&lt;/td&gt;&lt;td&gt;0.03&lt;/td&gt;&lt;td&gt;0.03&lt;/td&gt;&lt;td&gt;0.02&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Type: 'other'&lt;/td&gt;&lt;td&gt;0.06&lt;/td&gt;&lt;td&gt;0.07&lt;/td&gt;&lt;td&gt;0.06&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;a href="#outcomes" class="badge-link" style="right: auto; left: 20px;"&gt;Back to outcomes&lt;/a&gt;
+
+---
+count: false
+
+name: reg-descriptives
+
+## Registration Descriptives
+
+&lt;table class="desc-tbl" style="font-size: 15px;"&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th style="text-align:left"&gt;Dimension&lt;/th&gt;&lt;th&gt;Mean&lt;/th&gt;&lt;th&gt;p10&lt;/th&gt;&lt;th&gt;p25&lt;/th&gt;&lt;th&gt;p50&lt;/th&gt;&lt;th&gt;p75&lt;/th&gt;&lt;th&gt;p90&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class="panel-hdr"&gt;&lt;td colspan="7"&gt;A: Registrations&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Registered with PAP&lt;/td&gt;&lt;td&gt;0.40&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Has published paper&lt;/td&gt;&lt;td&gt;0.49&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Published in top 5&lt;/td&gt;&lt;td&gt;0.10&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Studies populations in LMIC&lt;/td&gt;&lt;td&gt;0.65&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Specifies heterogeneity in detail&lt;/td&gt;&lt;td&gt;0.12&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr class="panel-hdr"&gt;&lt;td colspan="7"&gt;B: Elements of the pre-registration&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Interventions&lt;/td&gt;&lt;td&gt;3.13&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;6&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Arms&lt;/td&gt;&lt;td&gt;4.79&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;td&gt;5&lt;/td&gt;&lt;td&gt;9.4&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Main outcomes&lt;/td&gt;&lt;td&gt;5.36&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;6&lt;/td&gt;&lt;td&gt;10.4&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Hypotheses (total) per study&lt;/td&gt;&lt;td&gt;15.92&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;9&lt;/td&gt;&lt;td&gt;18&lt;/td&gt;&lt;td&gt;32&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Main hypotheses&lt;/td&gt;&lt;td&gt;11.77&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;8&lt;/td&gt;&lt;td&gt;15&lt;/td&gt;&lt;td&gt;25.4&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Primary heterogeneity hypotheses&lt;/td&gt;&lt;td&gt;4.15&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Has more than 10 hypotheses&lt;/td&gt;&lt;td&gt;0.43&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr class="panel-hdr"&gt;&lt;td colspan="7"&gt;C: Frac. of hyp. per registration&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Detailed (overall)&lt;/td&gt;&lt;td&gt;0.31&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Type: simple difference&lt;/td&gt;&lt;td&gt;0.91&lt;/td&gt;&lt;td&gt;0.67&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Type: double difference&lt;/td&gt;&lt;td&gt;0.03&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Type: 'other'&lt;/td&gt;&lt;td&gt;0.06&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0.16&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;a href="#outcomes" class="badge-link"&gt;Back to outcomes&lt;/a&gt;
+
+---
+count: false
+
+name: priors-groups
+class: priors-slide
+background-image: url("figs/panels_by_group.png")
+background-size: 90%
+background-position: center 65%
+background-repeat: no-repeat
+
+## Additional Prior-Data Comparisons
+
+&lt;a href="#priors-main" class="badge-link"&gt;Back to priors&lt;/a&gt;
+
+---
+count: false
+
+name: newly-available
+
+## What Becomes Newly Available?
+
+.small[
+| Type of newly available | Share of hyps | Share of studies | Estimate | SE |
+|---|---:|---:|---:|---:|
+| Not available at baseline | 24.9% | 40.7% | 0.025 | (0.010) |
+| Available but **buried** | 56.1% | 37.0% | 0.048 | (0.013) |
+| Available but deemed inconsistent | 19.0% | 40.7% | 0.062 | (0.015) |
+| **Total** | 221 hyp | 27 studies | — | — |
+]
+
+&lt;a href="#types-explained" class="badge-link" style="right: auto; left: 20px;"&gt;Back to Types of Explained&lt;/a&gt;
+
+---
+count: false
+
+name: null-by-treatment
+
+## Average Percentage of Null Results Per Study, by Treatment
+
+&lt;table class="reg-tbl"&gt;
+&lt;thead&gt;
+&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th colspan="2" style="border-bottom: 1px solid #333;"&gt;Pre&lt;/th&gt;&lt;th colspan="3" style="border-bottom: 1px solid #333;"&gt;Post&lt;/th&gt;&lt;th&gt;&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;(1)&lt;/th&gt;&lt;th&gt;(2)&lt;/th&gt;&lt;th&gt;(3)&lt;/th&gt;&lt;th&gt;(4)&lt;/th&gt;&lt;th&gt;(5)&lt;/th&gt;&lt;th&gt;(6)&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Arm&lt;/th&gt;&lt;th&gt;Uncon-&lt;br/&gt;ditional&lt;/th&gt;&lt;th&gt;Condi-&lt;br/&gt;tional&lt;/th&gt;&lt;th&gt;Uncon-&lt;br/&gt;ditional&lt;/th&gt;&lt;th&gt;Condi-&lt;br/&gt;tional&lt;/th&gt;&lt;th&gt;Newly&lt;br/&gt;Available&lt;/th&gt;&lt;th&gt;p-value&lt;br/&gt;(5) vs. (2)&lt;/th&gt;&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr style="border-top: 1.5px solid #333;"&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;(N=317)&lt;/td&gt;&lt;td&gt;(N=217)&lt;/td&gt;&lt;td&gt;(N=317)&lt;/td&gt;&lt;td&gt;(N=225)&lt;/td&gt;&lt;td&gt;(N=27)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Control&lt;/td&gt;&lt;td&gt;24.8&lt;/td&gt;&lt;td&gt;66.6&lt;/td&gt;&lt;td&gt;24.8&lt;/td&gt;&lt;td&gt;66.6&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Awareness&lt;/td&gt;&lt;td&gt;23.7&lt;/td&gt;&lt;td&gt;53.8&lt;/td&gt;&lt;td&gt;24.0&lt;/td&gt;&lt;td&gt;54.4&lt;/td&gt;&lt;td&gt;62.5&lt;/td&gt;&lt;td&gt;0.688&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Engagement&lt;/td&gt;&lt;td&gt;28.8&lt;/td&gt;&lt;td&gt;69.9&lt;/td&gt;&lt;td&gt;34.2&lt;/td&gt;&lt;td&gt;70.5&lt;/td&gt;&lt;td&gt;75.2&lt;/td&gt;&lt;td&gt;0.611&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Resources&lt;/td&gt;&lt;td&gt;31.7&lt;/td&gt;&lt;td&gt;69.0&lt;/td&gt;&lt;td&gt;34.7&lt;/td&gt;&lt;td&gt;67.5&lt;/td&gt;&lt;td&gt;60.6&lt;/td&gt;&lt;td&gt;0.496&lt;/td&gt;&lt;/tr&gt;
+&lt;tr style="border-top: 1.5px solid #333;"&gt;&lt;td&gt;Any Treatment&lt;/td&gt;&lt;td&gt;27.5&lt;/td&gt;&lt;td&gt;64.5&lt;/td&gt;&lt;td&gt;29.9&lt;/td&gt;&lt;td&gt;64.5&lt;/td&gt;&lt;td&gt;68.4&lt;/td&gt;&lt;td&gt;0.563&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+.small[Conditional null fraction is nearly identical pre vs. post across all arms. Newly available results have a similar null share (col 5 vs. col 2, all p &gt; 0.49).]
+
+&lt;a href="#te-summary" class="badge-link" style="right: auto; left: 20px;"&gt;Back to Treatment Effects&lt;/a&gt;
+
+---
+count: false
+
+name: reg-table-backup
+
+## Main Treatment Effects — Full Table
+
+&lt;table class="reg-tbl" style="font-size: 15px; top: -40px;"&gt;
+&lt;thead&gt;
+&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th colspan="2" style="border-bottom: 1px solid #333;"&gt;Available&lt;/th&gt;&lt;th colspan="2" style="border-bottom: 1px solid #333;"&gt;Null&lt;/th&gt;&lt;th colspan="2" style="border-bottom: 1px solid #333;"&gt;Explained&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;(1)&lt;/th&gt;&lt;th&gt;(2)&lt;/th&gt;&lt;th&gt;(3)&lt;/th&gt;&lt;th&gt;(4)&lt;/th&gt;&lt;th&gt;(5)&lt;/th&gt;&lt;th&gt;(6)&lt;/th&gt;&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr style="border-top: 1.5px solid #333;"&gt;&lt;td&gt;H1: Awareness&lt;/td&gt;&lt;td&gt;0.004&lt;/td&gt;&lt;td&gt;0.004&lt;/td&gt;&lt;td&gt;0.003&lt;/td&gt;&lt;td&gt;0.003&lt;/td&gt;&lt;td&gt;0.043&lt;/td&gt;&lt;td&gt;0.043&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;(0.003)&lt;/td&gt;&lt;td&gt;(0.003)&lt;/td&gt;&lt;td&gt;(0.002)&lt;/td&gt;&lt;td&gt;(0.002)&lt;/td&gt;&lt;td&gt;(0.021)&lt;/td&gt;&lt;td&gt;(0.021)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Engagement&lt;/td&gt;&lt;td&gt;0.069&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;0.054&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;0.119&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;(0.022)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;(0.019)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;(0.033)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Resources&lt;/td&gt;&lt;td&gt;0.055&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;0.029&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;0.069&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;(0.021)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;(0.014)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;(0.026)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Pooled (Eng. or Res.)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;0.062&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;0.042&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;0.094&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;(0.015)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;(0.012)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;(0.022)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Post&lt;/td&gt;&lt;td&gt;0.000&lt;/td&gt;&lt;td&gt;0.000&lt;/td&gt;&lt;td&gt;0.000&lt;/td&gt;&lt;td&gt;0.000&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;(0.000)&lt;/td&gt;&lt;td&gt;(0.000)&lt;/td&gt;&lt;td&gt;(0.000)&lt;/td&gt;&lt;td&gt;(0.000)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr style="border-top: 1.5px solid #333;"&gt;&lt;td&gt;&lt;em&gt;N&lt;/em&gt;&lt;/td&gt;&lt;td&gt;634&lt;/td&gt;&lt;td&gt;634&lt;/td&gt;&lt;td&gt;634&lt;/td&gt;&lt;td&gt;634&lt;/td&gt;&lt;td&gt;317&lt;/td&gt;&lt;td&gt;317&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Study Fixed Effects&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Controls&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;/tr&gt;
+&lt;tr style="border-top: 1.5px solid #333;"&gt;&lt;td&gt;H2: Engagement −&lt;br/&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;Awareness&lt;/td&gt;&lt;td&gt;[0.001]&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[0.004]&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[0.024]&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;H3: Resources −&lt;br/&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;Engagement&lt;/td&gt;&lt;td&gt;[0.687]&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[0.85]&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;[0.885]&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+.small[Control mean = 0.36 (Available), 0.24 (Null), 0 (Explained). Robust SEs in parentheses; p-values in brackets.]
+
+&lt;a href="#te-summary" class="badge-link" style="right: auto; left: 20px;"&gt;Back to Treatment Effects&lt;/a&gt;
+
+---
+count: false
+
+name: estimation
+## Estimation Approach and Main Hypotheses to Test
+
+`$$Y_{it} = \mu_i + \delta_{1}\mathbf{1}[t=1] + \sum_{j=1}^{J} \color{blue}{\tau_{j}} \left(T_{ij} \times \mathbf{1}[t=1]\right) + \varepsilon_{it}, \quad t=0,1.$$`
+
+--
+
+- **H1-Awareness:** No effect of messaging + empty RR `\((T_1)\)`:
+`$$\mathrm{H1}_{0}: \color{blue}{\tau_{1}} = 0, \quad \mathrm{H1}_{A}: \tau_1 &gt; 0.$$`
+
+- **H2-Engagement:** No incremental effect of pre-filled RR `\((T_2)\)` relative to `\(T_1\)`:
+`$$\mathrm{H2}_{0}: \color{blue}{\tau_{2}} - \color{blue}{\tau_{1}} = 0, \quad \mathrm{H2}_{A}: \color{blue}{\tau_{2}} - \color{blue}{\tau_{1}} &gt; 0.$$`
+
+- **H3-Resources:** No incremental effect of RA support `\((T_3)\)` relative to `\(T_2\)`:
+`$$\mathrm{H3}_{0}: \color{blue}{\tau_{3}} - \color{blue}{\tau_{2}} = 0, \quad \mathrm{H3}_{A}: \color{blue}{\tau_{3}} - \color{blue}{\tau_{2}} &gt; 0.$$`
+
+&lt;a href="#te-summary" class="badge-link" style="right: auto; left: 20px;"&gt;Back to Treatment Effects&lt;/a&gt;
+
+---
+count: false
+
+## Backup: Sample Construction
+
+- Frame: AEA RCT Registry studies registered 2015–2017.
+- After eligibility (RCT, outcome-bearing, English-accessible), we encode 318 studies in rolling batches.
+- Batch 1: 140 studies, equal allocation.
+- Later batches: 20% assigned T0 *before* encoding, 80% encoded and then randomized within strata.
+- Two encoders per study, reconciliation and sampling of multi-row hypotheses by deterministic MD5 seed.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
