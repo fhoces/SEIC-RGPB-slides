@@ -8,6 +8,7 @@
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
     <style>
+    .remark-slide-content { padding: 1em 4em; }
     .focus-lit { margin-bottom: 0.6em; }
     .tyof-bar {
       width: 90%;
@@ -368,7 +369,7 @@
     .wf-slide .wf-cover-cd  { top: 46%; }  /* show A + B */
     .wf-slide .wf-cover-d   { top: 70%; }  /* show A + B + C */
     </style>
-    <link rel="stylesheet" href="../custom.css" type="text/css" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -386,102 +387,7 @@ Viviane H. Silva da Rocha, Gufran Pathan, Erik Ø. Sørensen, Bertil Tungodden&l
 
 &lt;br/&gt;
 
-.small[BITSS Annual Meeting — 2026]
-
----
-
-## Think of Your Own Field in Economics
-
-&amp;nbsp;
-
----
-count: false
-
-## Think of Your Own Field in Economics
-
-.focus-lit[Focus only on **causal** questions answered in the literature.]
-
-&lt;div class="tyof-bar"&gt;
-  &lt;div class="tyof-obs"&gt;&lt;/div&gt;
-  &lt;div class="tyof-rct"&gt;&lt;/div&gt;
-&lt;/div&gt;
-
-Each answer can be thought of as an estimate of a question of the form:
-
-`$$E[Y \mid X = x_1] \; - \; E[Y \mid X = x_0]$$`
-
-.phantom[(1) Can we observe **all** the questions from the *original* research design? No.]
-
-.phantom[(2) What fraction of original questions are never reported on? Don't know.]
-
----
-count: false
-
-## Think of Your Own Field in Economics
-
-.focus-lit[Focus only on **causal** questions answered in the literature.]
-
-&lt;div class="tyof-bar"&gt;
-  &lt;div class="tyof-obs"&gt;&lt;/div&gt;
-  &lt;div class="tyof-rct"&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="tyof-dashed tyof-dashed-full"&gt;&lt;span&gt;?&lt;/span&gt;&lt;/div&gt;
-
-Each answer can be thought of as an estimate of a question of the form:
-
-`$$E[Y \mid X = x_1] \; - \; E[Y \mid X = x_0]$$`
-
-(1) Can we observe **all** the questions from the *original* research design?
-
-(2) What fraction of original questions are never reported on?
-
----
-count: false
-
-## Think of Your Own Field in Economics
-
-.focus-lit[Focus only on **causal** questions answered in the literature.]
-
-&lt;div class="tyof-bar"&gt;
-  &lt;div class="tyof-obs"&gt;&lt;/div&gt;
-  &lt;div class="tyof-rct"&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="tyof-dashed tyof-dashed-full"&gt;&lt;span&gt;?&lt;/span&gt;&lt;/div&gt;
-
-Each answer can be thought of as an estimate of a question of the form:
-
-`$$E[Y \mid X = x_1] \; - \; E[Y \mid X = x_0]$$`
-
-(1) Can we observe **all** the questions from the *original* research design? **No.**
-
-(2) What fraction of original questions are never reported on? **Don't know.**
-
-`\(\Rightarrow\)` Widespread belief that most *available* results are statistically significant.
-
-`\(\Rightarrow\)` If true, raises the likelihood that "most research findings are false" .grey[(Ioannidis, 2005)].
-
----
-count: false
-
-## Think of Your Own Field in Economics
-
-.focus-lit[Focus only on **causal** questions answered in the literature.]
-
-&lt;div class="tyof-bar"&gt;
-  &lt;div class="tyof-obs tyof-label"&gt;Observational&lt;/div&gt;
-  &lt;div class="tyof-rct-blue tyof-label-white"&gt;RCTs&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="tyof-dashed tyof-dashed-right"&gt;&lt;/div&gt;
-
-Each answer can be thought of as an estimate of a question of the form:
-
-`$$E[Y \mid X = x_1] \; - \; E[Y \mid X = x_0]$$`
-
-(1) Can we observe **all** the questions from the *original* research design? **No.**
-
-(2) What fraction of original questions are never reported on? **Don't know.**
-
-.small[But now, for **randomized control trials**, the answer to (1) is **yes** — and we can start to answer (2).]
+.small[SEIC Kick-off Meeting — 2026]
 
 ---
 class: contrib
@@ -678,37 +584,7 @@ name: null-dist
 
 .small[Lots of null results reported: **64.3%**. Goes against priors that support the idea "Most Published Research is False" (Ioannidis, 2005).]
 
----
-
-## Surprising? Comparing Estimates to Expert Priors
-
----
-count: false
-class: priors-slide
-background-image: url("figs/combined_hist_priors.png")
-background-size: 90%
-background-position: center 65%
-background-repeat: no-repeat
-
-## Surprising? Comparing Estimates to Expert Priors
-
-&lt;div class="priors-cover-b"&gt;&lt;/div&gt;
-
----
-count: false
-name: priors-main
-class: priors-slide
-background-image: url("figs/combined_hist_priors.png")
-background-size: 90%
-background-position: center 65%
-background-repeat: no-repeat
-
-## Surprising? Comparing Estimates to Expert Priors
-
-&lt;a href="#priors-groups" class="badge-link" style="bottom: auto; top: 15px; right: 20px;"&gt;Additional Prior-Data&lt;br/&gt;Comparisons&lt;/a&gt;
-&lt;a href="#avail-null-chars" class="badge-link" style="bottom: auto; top: 55px; right: 20px;"&gt;Availability and Null&lt;br/&gt;Across Characteristics&lt;/a&gt;
-
-&lt;div style="position: absolute; bottom: 25px; left: 20px; font-size: 16px; color: #555;"&gt;Bars = distribution of expert priors.&lt;/div&gt;
+&lt;a href="#priors-main" class="badge-link" style="right: auto; left: 20px;"&gt;Comparing Estimates to Expert Priors&lt;/a&gt;
 
 ---
 count: false
@@ -910,86 +786,16 @@ count: false
 &lt;img src="figs/rr_het.png" style="width: 90%; display: block; margin: auto; border: 3px solid red;" /&gt;
 
 ---
-
-## Did Authors Engage with the Treatment?
-
----
-count: false
-
-## Did Authors Engage with the Treatment?
-
-.center[Engagement following the intervention email]
-
-&lt;table class="eng-tbl"&gt;
-&lt;thead&gt;
-&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;&lt;/th&gt;&lt;th colspan="3" style="border-bottom: 1px solid #333;"&gt;Clicked on:&lt;/th&gt;&lt;th colspan="3" style="border-bottom: 1px solid #333;"&gt;Responded with email:&lt;/th&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;(1)&lt;/th&gt;&lt;th&gt;(2)&lt;/th&gt;&lt;th&gt;(3)&lt;/th&gt;&lt;th&gt;(4)&lt;/th&gt;&lt;th&gt;(5)&lt;/th&gt;&lt;th&gt;(6)&lt;/th&gt;&lt;th&gt;(7)&lt;/th&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Arm&lt;/th&gt;&lt;th&gt;N&lt;/th&gt;&lt;th&gt;Any&lt;br/&gt;(%)&lt;/th&gt;&lt;th&gt;Results&lt;br/&gt;(%)&lt;/th&gt;&lt;th&gt;Details.pdf&lt;br/&gt;(%)&lt;/th&gt;&lt;th&gt;Yes&lt;br/&gt;(%)&lt;/th&gt;&lt;th&gt;Informative&lt;br/&gt;(%)&lt;/th&gt;&lt;th&gt;No&lt;br/&gt;(%)&lt;/th&gt;&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;&lt;td&gt;&lt;em&gt;Awareness&lt;/em&gt;&lt;/td&gt;&lt;td&gt;90&lt;/td&gt;&lt;td&gt;84.4&lt;/td&gt;&lt;td&gt;82.2&lt;/td&gt;&lt;td&gt;0.0&lt;/td&gt;&lt;td&gt;51.1&lt;/td&gt;&lt;td&gt;28.9&lt;/td&gt;&lt;td&gt;22.2&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;em&gt;Engagement&lt;/em&gt;&lt;/td&gt;&lt;td&gt;88&lt;/td&gt;&lt;td&gt;92.0&lt;/td&gt;&lt;td&gt;92.0&lt;/td&gt;&lt;td&gt;52.3&lt;/td&gt;&lt;td&gt;76.1&lt;/td&gt;&lt;td&gt;60.2&lt;/td&gt;&lt;td&gt;15.9&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;em&gt;Resources&lt;/em&gt;&lt;/td&gt;&lt;td&gt;88&lt;/td&gt;&lt;td&gt;90.9&lt;/td&gt;&lt;td&gt;90.9&lt;/td&gt;&lt;td&gt;47.7&lt;/td&gt;&lt;td&gt;69.3&lt;/td&gt;&lt;td&gt;50.0&lt;/td&gt;&lt;td&gt;19.3&lt;/td&gt;&lt;/tr&gt;
-&lt;tr style="border-top: 1.5px solid #333;"&gt;&lt;td&gt;Total&lt;/td&gt;&lt;td&gt;266&lt;/td&gt;&lt;td&gt;89.1&lt;/td&gt;&lt;td&gt;88.3&lt;/td&gt;&lt;td&gt;33.1&lt;/td&gt;&lt;td&gt;65.4&lt;/td&gt;&lt;td&gt;46.2&lt;/td&gt;&lt;td&gt;19.2&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-.small[*Note:* 14 studies expressed interest in RA Support through the Resources arm (2 via funds and 12 in time of Berkeley RAs). In practice, six took up the RA support from Berkeley but none followed up for the funds.]
-
----
 name: te-main
 
 ## Main Treatment Effects on Fraction Available
 
-&lt;img src="figs/y1_study_tretment_effect_dd.png" width="90%" style="margin-top: -20px;" style="display: block; margin: auto;" /&gt;
+&lt;img src="figs/y1_study_tretment_effect_dd.png" width="78%" style="margin-top: -20px;" style="display: block; margin: auto;" /&gt;
 
 .small[Awareness does not affect Availability. Engagement and Resources increase Availability by ~6–7pp. Additional resources on top of Engagement have no effect → pooling Engagement and Resources arms.]
 
 &lt;a href="#estimation" class="badge-link" style="bottom: auto; top: 15px; right: 20px;"&gt;Estimation &amp;&lt;br/&gt;Hypotheses&lt;/a&gt;
-
----
-name: te-summary
-class: contrib
-
-## Main Treatment Effects
-
-- Awareness has no effect on Available or Null, but a 4pp effect on Explained (SE = 0.021).
-
-- Across all three outcomes, we cannot reject the hypothesis of no incremental effect of Resources → the specification that pools Engagement and Resources is preferred.
-
-- Effect of Pooled (Eng. or Res.):
-  - **Available:** 0.062 (SE = 0.015)
-  - **Null:** 0.042 (SE = 0.012)
-  - **Explained:** 0.094 (SE = 0.022)
-
-- The effect on Null (unconditional) is driven by more hypotheses being reported. The composition of newly reported results is identical to the pre-treatment distribution.
-
-&lt;a href="#reg-table-backup" class="badge-link" style="right: auto; left: 20px; bottom: 15px;"&gt;Full Regression Table&lt;/a&gt;
-&lt;a href="#null-by-treatment" class="badge-link" style="right: auto; left: 180px; bottom: 15px;"&gt;Null by Arms&lt;/a&gt;
-
----
-
-name: types-explained
-## Types of Explained
-
-&lt;table class="reg-tbl"&gt;
-&lt;thead&gt;
-&lt;tr&gt;&lt;th style="text-align:left"&gt;Type of Explanation&lt;/th&gt;&lt;th&gt;Hypotheses&lt;/th&gt;&lt;th&gt;Studies&lt;/th&gt;&lt;th&gt;Estimate&lt;/th&gt;&lt;th&gt;SE&lt;/th&gt;&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr style="border-top: 1.5px solid #333;"&gt;&lt;td style="text-align:left"&gt;Failed or no intervention&lt;/td&gt;&lt;td&gt;18.2%&lt;/td&gt;&lt;td&gt;31.2%&lt;/td&gt;&lt;td&gt;0.050&lt;/td&gt;&lt;td&gt;(0.016)&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;b&gt;+ Intervention, no data&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;31.2%&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;33.3%&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;0.094&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;(0.022)&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr style="border-top: 1px solid #999;"&gt;&lt;td style="text-align:left"&gt;+ Intervention, bad data&lt;/td&gt;&lt;td&gt;6.0%&lt;/td&gt;&lt;td&gt;6.2%&lt;/td&gt;&lt;td&gt;0.108&lt;/td&gt;&lt;td&gt;(0.023)&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td style="text-align:left"&gt;+ Yes data, to-do analysis&lt;/td&gt;&lt;td&gt;20.4%&lt;/td&gt;&lt;td&gt;29.2%&lt;/td&gt;&lt;td&gt;0.120&lt;/td&gt;&lt;td&gt;(0.024)&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td style="text-align:left"&gt;+ Yes data, but low power&lt;/td&gt;&lt;td&gt;19.4%&lt;/td&gt;&lt;td&gt;10.4%&lt;/td&gt;&lt;td&gt;0.132&lt;/td&gt;&lt;td&gt;(0.025)&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td style="text-align:left"&gt;+ Disagree with authors&lt;/td&gt;&lt;td&gt;4.7%&lt;/td&gt;&lt;td&gt;6.2%&lt;/td&gt;&lt;td&gt;0.138&lt;/td&gt;&lt;td&gt;(0.025)&lt;/td&gt;&lt;/tr&gt;
-&lt;tr style="border-top: 1.5px solid #333;"&gt;&lt;td style="text-align:left"&gt;Total &lt;em&gt;N&lt;/em&gt;&lt;/td&gt;&lt;td&gt;653&lt;/td&gt;&lt;td&gt;48&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-.small[Rows are cumulative. Estimates show the pooled (Engagement or Resources) treatment effect as each explanation category is added.]
-
-&lt;a href="#newly-available" class="badge-link" style="right: auto; left: 20px; bottom: 15px;"&gt;Newly Available&lt;/a&gt;
+&lt;a href="#te-summary" class="badge-link" style="bottom: auto; top: 55px; right: 20px;"&gt;Treatment Effects&lt;br/&gt;Summary&lt;/a&gt;
 
 ---
 class: center, middle
@@ -1118,7 +924,7 @@ class: center, middle, inverse
 
 &lt;div style="position: absolute; bottom: 15px; left: 20px; text-align: center;"&gt;
 &lt;span style="font-size: 16px; color: #fff;"&gt;Slides here:&lt;/span&gt;&lt;br/&gt;
-&lt;a href="https://fhoces.github.io/BITSS-AM-2026-slides/" style="font-size: 16px; color: #fff;"&gt;tinyurl.com/2al6e5vs&lt;/a&gt;&lt;br/&gt;
+&lt;a href="https://fhoces.github.io/SEIC-RGPB-slides/" style="font-size: 16px; color: #fff;"&gt;fhoces.github.io/SEIC-RGPB-slides&lt;/a&gt;&lt;br/&gt;
 &lt;img src="figs/qr_slides.png" style="width: 140px; border: none; background: white; padding: 4px;"/&gt;&lt;br/&gt;
 &lt;span style="font-size: 16px; color: #fff;"&gt;fhoces@berkeley.edu&lt;/span&gt;
 &lt;/div&gt;
@@ -1153,7 +959,7 @@ with `\(\zeta_s\)` = stratum (PAP × LMIC) fixed effects.
 
 Outcomes:
 - `\(Y_1\)`: fraction of pre-specified hypotheses completely available per study.
-- `\(Y_3\)`: fraction null (`\(p &gt; 0.05\)`) among available.
+- `\(Y_3\)`: fraction null ($p &gt; 0.05$) among available.
 
 ---
 count: false
@@ -1464,6 +1270,211 @@ count: false
 - Batch 1: 140 studies, equal allocation.
 - Later batches: 20% assigned T0 *before* encoding, 80% encoded and then randomized within strata.
 - Two encoders per study, reconciliation and sampling of multi-row hypotheses by deterministic MD5 seed.
+---
+count: false
+
+## Think of Your Own Field in Economics
+
+&amp;nbsp;
+
+---
+count: false
+
+## Think of Your Own Field in Economics
+
+.focus-lit[Focus only on **causal** questions answered in the literature.]
+
+&lt;div class="tyof-bar"&gt;
+  &lt;div class="tyof-obs"&gt;&lt;/div&gt;
+  &lt;div class="tyof-rct"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+Each answer can be thought of as an estimate of a question of the form:
+
+`$$E[Y \mid X = x_1] \; - \; E[Y \mid X = x_0]$$`
+
+.phantom[(1) Can we observe **all** the questions from the *original* research design? No.]
+
+.phantom[(2) What fraction of original questions are never reported on? Don't know.]
+
+---
+count: false
+
+## Think of Your Own Field in Economics
+
+.focus-lit[Focus only on **causal** questions answered in the literature.]
+
+&lt;div class="tyof-bar"&gt;
+  &lt;div class="tyof-obs"&gt;&lt;/div&gt;
+  &lt;div class="tyof-rct"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="tyof-dashed tyof-dashed-full"&gt;&lt;span&gt;?&lt;/span&gt;&lt;/div&gt;
+
+Each answer can be thought of as an estimate of a question of the form:
+
+`$$E[Y \mid X = x_1] \; - \; E[Y \mid X = x_0]$$`
+
+(1) Can we observe **all** the questions from the *original* research design?
+
+(2) What fraction of original questions are never reported on?
+
+---
+count: false
+
+## Think of Your Own Field in Economics
+
+.focus-lit[Focus only on **causal** questions answered in the literature.]
+
+&lt;div class="tyof-bar"&gt;
+  &lt;div class="tyof-obs"&gt;&lt;/div&gt;
+  &lt;div class="tyof-rct"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="tyof-dashed tyof-dashed-full"&gt;&lt;span&gt;?&lt;/span&gt;&lt;/div&gt;
+
+Each answer can be thought of as an estimate of a question of the form:
+
+`$$E[Y \mid X = x_1] \; - \; E[Y \mid X = x_0]$$`
+
+(1) Can we observe **all** the questions from the *original* research design? **No.**
+
+(2) What fraction of original questions are never reported on? **Don't know.**
+
+`\(\Rightarrow\)` Widespread belief that most *available* results are statistically significant.
+
+`\(\Rightarrow\)` If true, raises the likelihood that "most research findings are false" .grey[(Ioannidis, 2005)].
+
+---
+count: false
+
+## Think of Your Own Field in Economics
+
+.focus-lit[Focus only on **causal** questions answered in the literature.]
+
+&lt;div class="tyof-bar"&gt;
+  &lt;div class="tyof-obs tyof-label"&gt;Observational&lt;/div&gt;
+  &lt;div class="tyof-rct-blue tyof-label-white"&gt;RCTs&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="tyof-dashed tyof-dashed-right"&gt;&lt;/div&gt;
+
+Each answer can be thought of as an estimate of a question of the form:
+
+`$$E[Y \mid X = x_1] \; - \; E[Y \mid X = x_0]$$`
+
+(1) Can we observe **all** the questions from the *original* research design? **No.**
+
+(2) What fraction of original questions are never reported on? **Don't know.**
+
+.small[But now, for **randomized control trials**, the answer to (1) is **yes** — and we can start to answer (2).]
+
+---
+count: false
+
+## Surprising? Comparing Estimates to Expert Priors
+
+---
+count: false
+class: priors-slide
+background-image: url("figs/combined_hist_priors.png")
+background-size: 90%
+background-position: center 65%
+background-repeat: no-repeat
+
+## Surprising? Comparing Estimates to Expert Priors
+
+&lt;div class="priors-cover-b"&gt;&lt;/div&gt;
+
+---
+count: false
+name: priors-main
+class: priors-slide
+background-image: url("figs/combined_hist_priors.png")
+background-size: 90%
+background-position: center 65%
+background-repeat: no-repeat
+
+## Surprising? Comparing Estimates to Expert Priors
+
+&lt;a href="#null-dist" class="badge-link" style="right: auto; left: 20px;"&gt;Back&lt;/a&gt;
+&lt;a href="#priors-groups" class="badge-link" style="bottom: auto; top: 15px; right: 20px;"&gt;Additional Prior-Data&lt;br/&gt;Comparisons&lt;/a&gt;
+&lt;a href="#avail-null-chars" class="badge-link" style="bottom: auto; top: 55px; right: 20px;"&gt;Availability and Null&lt;br/&gt;Across Characteristics&lt;/a&gt;
+
+&lt;div style="position: absolute; bottom: 25px; left: 20px; font-size: 16px; color: #555;"&gt;Bars = distribution of expert priors.&lt;/div&gt;
+
+---
+count: false
+
+## Did Authors Engage with the Treatment?
+
+---
+count: false
+
+## Did Authors Engage with the Treatment?
+
+.center[Engagement following the intervention email]
+
+&lt;table class="eng-tbl"&gt;
+&lt;thead&gt;
+&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;&lt;/th&gt;&lt;th colspan="3" style="border-bottom: 1px solid #333;"&gt;Clicked on:&lt;/th&gt;&lt;th colspan="3" style="border-bottom: 1px solid #333;"&gt;Responded with email:&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;(1)&lt;/th&gt;&lt;th&gt;(2)&lt;/th&gt;&lt;th&gt;(3)&lt;/th&gt;&lt;th&gt;(4)&lt;/th&gt;&lt;th&gt;(5)&lt;/th&gt;&lt;th&gt;(6)&lt;/th&gt;&lt;th&gt;(7)&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Arm&lt;/th&gt;&lt;th&gt;N&lt;/th&gt;&lt;th&gt;Any&lt;br/&gt;(%)&lt;/th&gt;&lt;th&gt;Results&lt;br/&gt;(%)&lt;/th&gt;&lt;th&gt;Details.pdf&lt;br/&gt;(%)&lt;/th&gt;&lt;th&gt;Yes&lt;br/&gt;(%)&lt;/th&gt;&lt;th&gt;Informative&lt;br/&gt;(%)&lt;/th&gt;&lt;th&gt;No&lt;br/&gt;(%)&lt;/th&gt;&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;em&gt;Awareness&lt;/em&gt;&lt;/td&gt;&lt;td&gt;90&lt;/td&gt;&lt;td&gt;84.4&lt;/td&gt;&lt;td&gt;82.2&lt;/td&gt;&lt;td&gt;0.0&lt;/td&gt;&lt;td&gt;51.1&lt;/td&gt;&lt;td&gt;28.9&lt;/td&gt;&lt;td&gt;22.2&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;em&gt;Engagement&lt;/em&gt;&lt;/td&gt;&lt;td&gt;88&lt;/td&gt;&lt;td&gt;92.0&lt;/td&gt;&lt;td&gt;92.0&lt;/td&gt;&lt;td&gt;52.3&lt;/td&gt;&lt;td&gt;76.1&lt;/td&gt;&lt;td&gt;60.2&lt;/td&gt;&lt;td&gt;15.9&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;em&gt;Resources&lt;/em&gt;&lt;/td&gt;&lt;td&gt;88&lt;/td&gt;&lt;td&gt;90.9&lt;/td&gt;&lt;td&gt;90.9&lt;/td&gt;&lt;td&gt;47.7&lt;/td&gt;&lt;td&gt;69.3&lt;/td&gt;&lt;td&gt;50.0&lt;/td&gt;&lt;td&gt;19.3&lt;/td&gt;&lt;/tr&gt;
+&lt;tr style="border-top: 1.5px solid #333;"&gt;&lt;td&gt;Total&lt;/td&gt;&lt;td&gt;266&lt;/td&gt;&lt;td&gt;89.1&lt;/td&gt;&lt;td&gt;88.3&lt;/td&gt;&lt;td&gt;33.1&lt;/td&gt;&lt;td&gt;65.4&lt;/td&gt;&lt;td&gt;46.2&lt;/td&gt;&lt;td&gt;19.2&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+.small[*Note:* 14 studies expressed interest in RA Support through the Resources arm (2 via funds and 12 in time of Berkeley RAs). In practice, six took up the RA support from Berkeley but none followed up for the funds.]
+
+---
+count: false
+name: te-summary
+class: contrib
+
+## Main Treatment Effects
+
+- Awareness has no effect on Available or Null, but a 4pp effect on Explained (SE = 0.021).
+
+- Across all three outcomes, we cannot reject the hypothesis of no incremental effect of Resources → the specification that pools Engagement and Resources is preferred.
+
+- Effect of Pooled (Eng. or Res.):
+  - **Available:** 0.062 (SE = 0.015)
+  - **Null:** 0.042 (SE = 0.012)
+  - **Explained:** 0.094 (SE = 0.022)
+
+- The effect on Null (unconditional) is driven by more hypotheses being reported. The composition of newly reported results is identical to the pre-treatment distribution.
+
+&lt;a href="#te-main" class="badge-link" style="right: auto; left: 20px; bottom: auto; top: 15px;"&gt;Back&lt;/a&gt;
+&lt;a href="#reg-table-backup" class="badge-link" style="right: auto; left: 20px; bottom: 15px;"&gt;Full Regression Table&lt;/a&gt;
+&lt;a href="#null-by-treatment" class="badge-link" style="right: auto; left: 180px; bottom: 15px;"&gt;Null by Arms&lt;/a&gt;
+
+---
+count: false
+
+name: types-explained
+## Types of Explained
+
+&lt;table class="reg-tbl"&gt;
+&lt;thead&gt;
+&lt;tr&gt;&lt;th style="text-align:left"&gt;Type of Explanation&lt;/th&gt;&lt;th&gt;Hypotheses&lt;/th&gt;&lt;th&gt;Studies&lt;/th&gt;&lt;th&gt;Estimate&lt;/th&gt;&lt;th&gt;SE&lt;/th&gt;&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr style="border-top: 1.5px solid #333;"&gt;&lt;td style="text-align:left"&gt;Failed or no intervention&lt;/td&gt;&lt;td&gt;18.2%&lt;/td&gt;&lt;td&gt;31.2%&lt;/td&gt;&lt;td&gt;0.050&lt;/td&gt;&lt;td&gt;(0.016)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;b&gt;+ Intervention, no data&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;31.2%&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;33.3%&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;0.094&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;(0.022)&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr style="border-top: 1px solid #999;"&gt;&lt;td style="text-align:left"&gt;+ Intervention, bad data&lt;/td&gt;&lt;td&gt;6.0%&lt;/td&gt;&lt;td&gt;6.2%&lt;/td&gt;&lt;td&gt;0.108&lt;/td&gt;&lt;td&gt;(0.023)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;+ Yes data, to-do analysis&lt;/td&gt;&lt;td&gt;20.4%&lt;/td&gt;&lt;td&gt;29.2%&lt;/td&gt;&lt;td&gt;0.120&lt;/td&gt;&lt;td&gt;(0.024)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;+ Yes data, but low power&lt;/td&gt;&lt;td&gt;19.4%&lt;/td&gt;&lt;td&gt;10.4%&lt;/td&gt;&lt;td&gt;0.132&lt;/td&gt;&lt;td&gt;(0.025)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;+ Disagree with authors&lt;/td&gt;&lt;td&gt;4.7%&lt;/td&gt;&lt;td&gt;6.2%&lt;/td&gt;&lt;td&gt;0.138&lt;/td&gt;&lt;td&gt;(0.025)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr style="border-top: 1.5px solid #333;"&gt;&lt;td style="text-align:left"&gt;Total &lt;em&gt;N&lt;/em&gt;&lt;/td&gt;&lt;td&gt;653&lt;/td&gt;&lt;td&gt;48&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+.small[Rows are cumulative. Estimates show the pooled (Engagement or Resources) treatment effect as each explanation category is added.]
+
+&lt;a href="#newly-available" class="badge-link" style="right: auto; left: 20px; bottom: 15px;"&gt;Newly Available&lt;/a&gt;
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
