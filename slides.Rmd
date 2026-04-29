@@ -601,7 +601,7 @@ class: center, middle, inverse
 
 <div style="position: absolute; bottom: 15px; left: 20px; text-align: center;">
 <span style="font-size: 16px; color: #fff;">Slides here:</span><br/>
-<a href="https://fhoces.github.io/SEIC-RGPB-slides/" style="font-size: 16px; color: #fff;">fhoces.github.io/SEIC-RGPB-slides</a><br/>
+<a href="https://tinyurl.com/43x8f74e" style="font-size: 16px; color: #fff;">tinyurl.com/43x8f74e</a><br/>
 <img src="figs/qr_slides.png" style="width: 140px; border: none; background: white; padding: 4px;"/><br/>
 <span style="font-size: 16px; color: #fff;">fhoces@berkeley.edu</span>
 </div>
